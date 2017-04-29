@@ -1,0 +1,134 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<hr />
+<nav class="container">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Botón Navegación</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a><span class="glyphicon glyphicon-user"></span> Bienvenido (a) : Nataly Rojas Tejada</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div id="general" class="container">
+    <div class='row'>
+        <div class='col-sm-2'>
+            <div id="nom_proyecto"><b>Proyecto: Gestión de Centro DENTAL</b></div>
+            <!--inicio bloque menu lateral-->
+            <div id="MenuLateral">
+                <div class="panel-group" id="accordion">
+                    <!--inicia opcion del menu -->
+                    <!--inicia opcion del menu -->
+                    <div class="panel panel-default">
+                        <!--inicio definicion del titulo del la opcion del menu-->
+                        <div class="panel-heading">
+                            <!--inicio opcion del menu MANTENIMIENTO MODULO-->
+                            <div class="panel panel-default">
+                                <!--inicio definicion del titulo del la opcion del menu-->
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a href="#collapsethree" data-toggle="collapse" data-parent="#accordion"> <span class="glyphicon glyphicon-modal-window"></span>MÓDULO DE ATENCIÓN</a>
+                                    </h4>
+                                </div>
+                                <!--fin definicion del titulo del la opcion del menu-->
+                                <!--inicio elementos que mostrará la opcion del menú-->
+                                <div class="panel-collapse collapse " id="collapsethree">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li>@Html.ActionLink("Ordenes de Pago", "Index", "OrdenDePago")</li>
+                                            <li><a href="#naturalMan">Listar</a></li>
+                                            <li><a href="#direccionMan">Otros</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--fin elementos que mostrará la opcion del menú-->
+                            </div>
+                            <!--FIN opcion del menu MANTENIMIENTO PERSONA-->
+                            <!--inicio opcion del menu MANTENIMIENTO CONSULTA-->
+                            <div class="panel panel-default">
+                                <!--inicio definicion del titulo del la opcion del menu-->
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a href="#collapsefour" data-toggle="collapse" data-parent="#accordion"> <span class="glyphicon glyphicon-modal-window"></span> CONSULTA</a>
+                                    </h4>
+                                </div>
+                                <!--fin definicion del titulo del la opcion del menu-->
+                                <!--inicio elementos que mostrará la opcion del menú-->
+                                <div class="panel-collapse collapse " id="collapsefour">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="#consultaCR1">Consulta CR1</a></li>
+                                            <li><a href="#consultaCR2">Consulta CR2</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--fin elementos que mostrará la opcion del menú-->
+                            </div>
+                            <!--FIN opcion del menu MANTENIMIENTO CONSULTA-->
+                            <!--inicio opcion del menu MANTENIMIENTO SOLICITUD-->
+                            <div class="panel panel-default">
+                                <!--inicio definicion del titulo del la opcion del menu-->
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a href="#collapsefive" data-toggle="collapse" data-parent="#accordion"> <span class="glyphicon glyphicon-modal-window"></span>SOLICITUD</a>
+                                    </h4>
+                                </div>
+                                <!--fin definicion del titulo del la opcion del menu-->
+                                <!--inicio elementos que mostrará la opcion del menú-->
+                                <div class="panel-collapse collapse " id="collapsefive">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li><a href="#crearsoli">Crear Solicitud</a></li>
+
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--fin elementos que mostrará la opcion del menú-->
+                            </div>
+                            <!--FIN opcion del menu MANTENIMIENTO SOLICITUD-->
+
+                        </div>
+                        <!--fin definicion del titulo del la opcion del menu-->
+                        <!--inicio elementos que mostrará la opcion del menú-->
+                        <div class="panel-collapse collapse " id="collapseTwo">
+                            <div class="panel-body">
+                                <ul>
+                                    <!--
+                                    <li><a href="#listado">Persona Jurídica</a></li>
+                                    <li><a href="#natural">Persona Natural</a></li>
+                                    <li><a href="#consultaCR1">Consulta CR1</a></li>
+                                    <li><a href="#consultaCR2">Consulta CR2</a></li>-->
+
+                                </ul>
+                            </div>
+                        </div>
+                        <!--fin elementos que mostrará la opcion del menú-->
+                    </div>
+
+                </div>
+            </div>
+            <!--fin bloque menu lateral-->
+        </div>
+        <div class='col-sm-10'>
+            <div id="container" ng-view></div>
+        </div>
+    </div>
+</div>

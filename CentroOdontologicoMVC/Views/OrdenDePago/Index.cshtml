@@ -1,0 +1,101 @@
+﻿@model IEnumerable<CentroOdontologicoMVC.Models.GCO_Orden_De_Pago>
+
+<hr />
+
+<div class='panel-body'>
+    <form class="form-horizontal">
+
+        <!--inicio del objeto text-->
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Tipo de Documento:</label>
+            <div class="col-xs-8">
+                <select ng-model="tipoactividad" class="form-control" ng-options="x for (x, y) in tipactividad">
+                    <option value="option-1" class="col-xs-2 control-label">DNI</option>
+                    <option value="option-2" class="col-xs-2 control-label">Carnet Extr.</option>
+                    <option value="option-3" class="col-xs-2 control-label">Pasaporte</option>
+                </select>
+            </div>
+        </div>
+        <!--fin del objeto text-->
+        <!--inicio del objeto text-->
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Número de Documento:</label>
+            <div class="col-xs-8">
+                <input type="text" ng-model="codpersona" class="form-control" required placeholder="Ingrese número de documento" />
+            </div>
+        </div>
+        <!--fin del objeto text-->
+        <!--inicio del objeto text-->
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Fecha de Inicio:</label>
+            <div class="col-xs-8">
+                <input type="text" ng-model="fechaalta" class="form-control" required placeholder="Ingrese Fecha inicio DD/MM/YYYY" />
+            </div>
+        </div>
+        <!--fin del objeto text-->
+        <!--inicio del objeto text-->
+        <div class="form-group">
+            <label class="col-xs-2 control-label">Fecha Fin:</label>
+            <div class="col-xs-8">
+                <input type="text" ng-model="fechaalta" class="form-control" required placeholder="Ingrese Fecha fin DD/MM/YYYY" />
+            </div>
+        </div>
+        <!--fin del objeto text-->
+
+        <button type="button" class="btn btn-primary">Buscar orden de pago</button>
+
+        @*<button type="button">@Html.ActionLink("Buscar orden de pago", "Index", "OrdenDePago")</button>*@   
+
+        <button type="button">@Html.ActionLink("Generar Orden de Pago", "GenerarOrdenDePago", "OrdenDePago")</button>
+        <hr />
+        <div class="container">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.nroOrdenPago)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.precioTotOP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.descuentoOP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fechaRegOP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.fechaModOP)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.idEstado)
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.nroOrdenPago)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.precioTotOP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.descuentoOP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fechaRegOP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.fechaModOP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.idEstado)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </form>
+    
+</div>

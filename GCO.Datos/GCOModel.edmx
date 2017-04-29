@@ -1,0 +1,1322 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RicardoPalmaBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="codArticulo" />
+          </Key>
+          <Property Name="codArticulo" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="unidadMedida" Type="varchar" MaxLength="50" />
+          <Property Name="TipoArticulo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="costosxUM" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fechaRegArticulo" Type="date" />
+          <Property Name="fechaModArticulo" Type="date" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="nroCita" />
+          </Key>
+          <Property Name="nroCita" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idPaciente" Type="int" />
+          <Property Name="nroIdentificProf" Type="int" Nullable="false" />
+          <Property Name="idEspecialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaCita" Type="date" />
+          <Property Name="horaCita" Type="date" />
+          <Property Name="observacion" Type="varchar" MaxLength="50" />
+          <Property Name="fechaRegCita" Type="date" Nullable="false" />
+          <Property Name="fechaModCita" Type="date" />
+          <Property Name="idConsultorio" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GCO_Consultorio">
+          <Key>
+            <PropertyRef Name="idConsultorio" />
+          </Key>
+          <Property Name="idConsultorio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descConsultorio" Type="varchar" MaxLength="50" />
+          <Property Name="estadoConsultorio" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GCO_Especialidad">
+          <Key>
+            <PropertyRef Name="idEspecialidad" />
+          </Key>
+          <Property Name="idEspecialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descEspecialidad" Type="varchar" MaxLength="100" />
+          <Property Name="fechaRegEspec" Type="date" />
+          <Property Name="fechaModEspec" Type="date" />
+        </EntityType>
+        <EntityType Name="GCO_Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descEstado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="paramGrupo" Type="varchar" MaxLength="50" />
+          <Property Name="estadoActivo" Type="bit" />
+        </EntityType>
+        <EntityType Name="GCO_Ficha_Dental">
+          <Key>
+            <PropertyRef Name="idFichaDental" />
+          </Key>
+          <Property Name="idFichaDental" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nroHistoria" Type="int" Nullable="false" />
+          <Property Name="diagnosticoFD" Type="varchar" MaxLength="50" />
+          <Property Name="observacionFD" Type="varchar" MaxLength="50" />
+          <Property Name="notaAvanceFD" Type="varchar" MaxLength="50" />
+          <Property Name="fechaRegFD" Type="date" />
+          <Property Name="fechaModFD" Type="date" />
+          <Property Name="idEstado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GCO_Orden_De_Atencion">
+          <Key>
+            <PropertyRef Name="idOrdenAtencion" />
+          </Key>
+          <Property Name="idOrdenAtencion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idPlanTratamiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idTipoAtencion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idEstado" Type="varchar" MaxLength="50" />
+          <Property Name="fechaRegOA" Type="date" />
+          <Property Name="fechaModOA" Type="date" />
+          <Property Name="nroOrdenPago" Type="varchar" MaxLength="50" />
+          <Property Name="numOrdenAtencion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GCO_Orden_De_Pago">
+          <Key>
+            <PropertyRef Name="nroOrdenPago" />
+          </Key>
+          <Property Name="nroOrdenPago" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="precioTotOP" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="descuentoOP" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="fechaRegOP" Type="date" />
+          <Property Name="fechaModOP" Type="date" />
+          <Property Name="idEstado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GCO_Plan_De_Tratamiento">
+          <Key>
+            <PropertyRef Name="idPlanTratamiento" />
+          </Key>
+          <Property Name="idPlanTratamiento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idFichaDental" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descPlanTratamiento" Type="varchar" MaxLength="50" />
+          <Property Name="fechaRegPT" Type="date" />
+          <Property Name="fechaModPT" Type="date" />
+          <Property Name="idEstado" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GCO_Solicitud_De_Insumos">
+          <Key>
+            <PropertyRef Name="idSolicitudInsumos" />
+          </Key>
+          <Property Name="idSolicitudInsumos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idEstado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="observacionSI" Type="varchar" MaxLength="100" />
+          <Property Name="fechaRegSI" Type="date" />
+          <Property Name="nroIdentificProf" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GCO_Solicitud_De_Insumos_Detalle">
+          <Key>
+            <PropertyRef Name="idSolInsumDet" />
+          </Key>
+          <Property Name="idSolInsumDet" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idSolicitudInsumos" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="codArticulo" Type="int" Nullable="false" />
+          <Property Name="cantidadInsumo" Type="int" />
+          <Property Name="fechaRegSID" Type="date" />
+        </EntityType>
+        <EntityType Name="GCO_Tipo_Atencion">
+          <Key>
+            <PropertyRef Name="idTipoAtencion" />
+          </Key>
+          <Property Name="idTipoAtencion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="descTipoAtencion" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="estadoTipoAtencion" Type="varchar" MaxLength="50" />
+          <Property Name="fechaRegTA" Type="date" />
+          <Property Name="fechaModTA" Type="date" />
+          <Property Name="precioTipoAtencion" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="HistoriaClinica">
+          <Key>
+            <PropertyRef Name="nroHistoria" />
+          </Key>
+          <Property Name="nroHistoria" Type="int" Nullable="false" />
+          <Property Name="idPaciente" Type="int" />
+          <Property Name="grupoSanguineo" Type="varchar" MaxLength="50" />
+          <Property Name="observacion" Type="varchar" MaxLength="1000" />
+          <Property Name="fechaCreacion" Type="date" />
+          <Property Name="fechaActualizacion" Type="date" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="idPaciente" />
+          </Key>
+          <Property Name="idPaciente" Type="int" Nullable="false" />
+          <Property Name="TipoDocIdentidad" Type="varchar" MaxLength="2" />
+          <Property Name="NumDocIdentidad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombresPaciente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apePatPaciente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apeMatPaciente" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaNacPaciente" Type="date" Nullable="false" />
+          <Property Name="PaisNacPaciente" Type="varbinary" MaxLength="50" />
+          <Property Name="edad" Type="varchar" MaxLength="5" />
+          <Property Name="sexo" Type="varchar" MaxLength="2" />
+          <Property Name="telefono" Type="varchar" MaxLength="10" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="distrito" Type="varchar" MaxLength="50" />
+          <Property Name="provincia" Type="varchar" MaxLength="50" />
+          <Property Name="departamento" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Profesional">
+          <Key>
+            <PropertyRef Name="nroIdentificProf" />
+          </Key>
+          <Property Name="nroIdentificProf" Type="int" Nullable="false" />
+          <Property Name="tipoDocIdentidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="numDocIdentidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdEspecialidad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombresProf" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apePatProf" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="apeMatProf" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fechaNacProf" Type="date" />
+          <Property Name="sexo" Type="varchar" MaxLength="3" />
+          <Property Name="telefono" Type="varchar" MaxLength="10" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="distrito" Type="varchar" MaxLength="50" />
+          <Property Name="provincia" Type="varchar" MaxLength="50" />
+          <Property Name="departamento" Type="varchar" MaxLength="50" />
+          <Property Name="nroColegiatura" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK__Cita__idConsulto__797309D9">
+          <End Role="GCO_Consultorio" Type="Self.GCO_Consultorio" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Consultorio">
+              <PropertyRef Name="idConsultorio" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idConsultorio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__idEspecial__7A672E12">
+          <End Role="GCO_Especialidad" Type="Self.GCO_Especialidad" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Especialidad">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__idPaciente__7B5B524B">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="idPaciente" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__nroIdentif__7C4F7684">
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="nroIdentificProf" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="nroIdentificProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Ficha__idEst__7D439ABD">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Ficha_Dental">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Ficha__nroHi__7E37BEF6">
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="1" />
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoriaClinica">
+              <PropertyRef Name="nroHistoria" />
+            </Principal>
+            <Dependent Role="GCO_Ficha_Dental">
+              <PropertyRef Name="nroHistoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idEst__02084FDA">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Pago" Type="Self.GCO_Orden_De_Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Pago">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idEst__7F2BE32F">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idTip__01142BA1">
+          <End Role="GCO_Tipo_Atencion" Type="Self.GCO_Tipo_Atencion" Multiplicity="1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Tipo_Atencion">
+              <PropertyRef Name="idTipoAtencion" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idTipoAtencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Plan___idEst__04E4BC85">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Plan___idFic__05D8E0BE">
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="1" />
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Ficha_Dental">
+              <PropertyRef Name="idFichaDental" />
+            </Principal>
+            <Dependent Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idFichaDental" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__codAr__09A971A2">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos_Detalle" Type="Self.GCO_Solicitud_De_Insumos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="codArticulo" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos_Detalle">
+              <PropertyRef Name="codArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__idEst__07C12930">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__idSol__0A9D95DB">
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos_Detalle" Type="Self.GCO_Solicitud_De_Insumos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="idSolicitudInsumos" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos_Detalle">
+              <PropertyRef Name="idSolicitudInsumos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__nroId__08B54D69">
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="nroIdentificProf" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="nroIdentificProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HistoriaC__idPac__0B91BA14">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="idPaciente" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="idPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesion__IdEsp__0C85DE4D">
+          <End Role="GCO_Especialidad" Type="Self.GCO_Especialidad" Multiplicity="1" />
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Especialidad">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="Profesional">
+              <PropertyRef Name="IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago">
+          <End Role="GCO_Orden_De_Pago" Type="Self.GCO_Orden_De_Pago" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Orden_De_Pago">
+              <PropertyRef Name="nroOrdenPago" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="nroOrdenPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento">
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idPlanTratamiento" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idPlanTratamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RicardoPalmaBDModelStoreContainer">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cita" EntityType="Self.Cita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Consultorio" EntityType="Self.GCO_Consultorio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Especialidad" EntityType="Self.GCO_Especialidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Estado" EntityType="Self.GCO_Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Ficha_Dental" EntityType="Self.GCO_Ficha_Dental" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Orden_De_Atencion" EntityType="Self.GCO_Orden_De_Atencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Orden_De_Pago" EntityType="Self.GCO_Orden_De_Pago" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Plan_De_Tratamiento" EntityType="Self.GCO_Plan_De_Tratamiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Solicitud_De_Insumos" EntityType="Self.GCO_Solicitud_De_Insumos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Solicitud_De_Insumos_Detalle" EntityType="Self.GCO_Solicitud_De_Insumos_Detalle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GCO_Tipo_Atencion" EntityType="Self.GCO_Tipo_Atencion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HistoriaClinica" EntityType="Self.HistoriaClinica" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profesional" EntityType="Self.Profesional" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cita__idConsulto__797309D9" Association="Self.FK__Cita__idConsulto__797309D9">
+            <End Role="GCO_Consultorio" EntitySet="GCO_Consultorio" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__idEspecial__7A672E12" Association="Self.FK__Cita__idEspecial__7A672E12">
+            <End Role="GCO_Especialidad" EntitySet="GCO_Especialidad" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__idPaciente__7B5B524B" Association="Self.FK__Cita__idPaciente__7B5B524B">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__nroIdentif__7C4F7684" Association="Self.FK__Cita__nroIdentif__7C4F7684">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Ficha__idEst__7D439ABD" Association="Self.FK__GCO_Ficha__idEst__7D439ABD">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Ficha__nroHi__7E37BEF6" Association="Self.FK__GCO_Ficha__nroHi__7E37BEF6">
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idEst__02084FDA" Association="Self.FK__GCO_Orden__idEst__02084FDA">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Orden_De_Pago" EntitySet="GCO_Orden_De_Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idEst__7F2BE32F" Association="Self.FK__GCO_Orden__idEst__7F2BE32F">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idTip__01142BA1" Association="Self.FK__GCO_Orden__idTip__01142BA1">
+            <End Role="GCO_Tipo_Atencion" EntitySet="GCO_Tipo_Atencion" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Plan___idEst__04E4BC85" Association="Self.FK__GCO_Plan___idEst__04E4BC85">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Plan___idFic__05D8E0BE" Association="Self.FK__GCO_Plan___idFic__05D8E0BE">
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__codAr__09A971A2" Association="Self.FK__GCO_Solic__codAr__09A971A2">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="GCO_Solicitud_De_Insumos_Detalle" EntitySet="GCO_Solicitud_De_Insumos_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__idEst__07C12930" Association="Self.FK__GCO_Solic__idEst__07C12930">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__idSol__0A9D95DB" Association="Self.FK__GCO_Solic__idSol__0A9D95DB">
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+            <End Role="GCO_Solicitud_De_Insumos_Detalle" EntitySet="GCO_Solicitud_De_Insumos_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__nroId__08B54D69" Association="Self.FK__GCO_Solic__nroId__08B54D69">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HistoriaC__idPac__0B91BA14" Association="Self.FK__HistoriaC__idPac__0B91BA14">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesion__IdEsp__0C85DE4D" Association="Self.FK__Profesion__IdEsp__0C85DE4D">
+            <End Role="GCO_Especialidad" EntitySet="GCO_Especialidad" />
+            <End Role="Profesional" EntitySet="Profesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago" Association="Self.FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago">
+            <End Role="GCO_Orden_De_Pago" EntitySet="GCO_Orden_De_Pago" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento" Association="Self.FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento">
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RicardoPalmaBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulo">
+          <Key>
+            <PropertyRef Name="codArticulo" />
+          </Key>
+          <Property Name="codArticulo" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="unidadMedida" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoArticulo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="costosxUM" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="fechaRegArticulo" Type="DateTime" Precision="0" />
+          <Property Name="fechaModArticulo" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="GCO_Solicitud_De_Insumos_Detalle" Relationship="Self.FK__GCO_Solic__codAr__09A971A2" FromRole="Articulo" ToRole="GCO_Solicitud_De_Insumos_Detalle" />
+        </EntityType>
+        <EntityType Name="Cita">
+          <Key>
+            <PropertyRef Name="nroCita" />
+          </Key>
+          <Property Name="nroCita" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idPaciente" Type="Int32" />
+          <Property Name="nroIdentificProf" Type="Int32" Nullable="false" />
+          <Property Name="idEspecialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaCita" Type="DateTime" Precision="0" />
+          <Property Name="horaCita" Type="DateTime" Precision="0" />
+          <Property Name="observacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegCita" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fechaModCita" Type="DateTime" Precision="0" />
+          <Property Name="idConsultorio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GCO_Consultorio" Relationship="Self.FK__Cita__idConsulto__797309D9" FromRole="Cita" ToRole="GCO_Consultorio" />
+          <NavigationProperty Name="GCO_Especialidad" Relationship="Self.FK__Cita__idEspecial__7A672E12" FromRole="Cita" ToRole="GCO_Especialidad" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__Cita__idPaciente__7B5B524B" FromRole="Cita" ToRole="Paciente" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Cita__nroIdentif__7C4F7684" FromRole="Cita" ToRole="Profesional" />
+        </EntityType>
+        <EntityType Name="GCO_Consultorio">
+          <Key>
+            <PropertyRef Name="idConsultorio" />
+          </Key>
+          <Property Name="idConsultorio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descConsultorio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estadoConsultorio" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK__Cita__idConsulto__797309D9" FromRole="GCO_Consultorio" ToRole="Cita" />
+        </EntityType>
+        <EntityType Name="GCO_Especialidad">
+          <Key>
+            <PropertyRef Name="idEspecialidad" />
+          </Key>
+          <Property Name="idEspecialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descEspecialidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegEspec" Type="DateTime" Precision="0" />
+          <Property Name="fechaModEspec" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK__Cita__idEspecial__7A672E12" FromRole="GCO_Especialidad" ToRole="Cita" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__Profesion__IdEsp__0C85DE4D" FromRole="GCO_Especialidad" ToRole="Profesional" />
+        </EntityType>
+        <EntityType Name="GCO_Estado">
+          <Key>
+            <PropertyRef Name="idEstado" />
+          </Key>
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="paramGrupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estadoActivo" Type="Boolean" />
+          <NavigationProperty Name="GCO_Ficha_Dental" Relationship="Self.FK__GCO_Ficha__idEst__7D439ABD" FromRole="GCO_Estado" ToRole="GCO_Ficha_Dental" />
+          <NavigationProperty Name="GCO_Orden_De_Pago" Relationship="Self.FK__GCO_Orden__idEst__02084FDA" FromRole="GCO_Estado" ToRole="GCO_Orden_De_Pago" />
+          <NavigationProperty Name="GCO_Orden_De_Atencion" Relationship="Self.FK__GCO_Orden__idEst__7F2BE32F" FromRole="GCO_Estado" ToRole="GCO_Orden_De_Atencion" />
+          <NavigationProperty Name="GCO_Plan_De_Tratamiento" Relationship="Self.FK__GCO_Plan___idEst__04E4BC85" FromRole="GCO_Estado" ToRole="GCO_Plan_De_Tratamiento" />
+          <NavigationProperty Name="GCO_Solicitud_De_Insumos" Relationship="Self.FK__GCO_Solic__idEst__07C12930" FromRole="GCO_Estado" ToRole="GCO_Solicitud_De_Insumos" />
+        </EntityType>
+        <EntityType Name="GCO_Ficha_Dental">
+          <Key>
+            <PropertyRef Name="idFichaDental" />
+          </Key>
+          <Property Name="idFichaDental" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nroHistoria" Type="Int32" Nullable="false" />
+          <Property Name="diagnosticoFD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observacionFD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="notaAvanceFD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegFD" Type="DateTime" Precision="0" />
+          <Property Name="fechaModFD" Type="DateTime" Precision="0" />
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GCO_Estado" Relationship="Self.FK__GCO_Ficha__idEst__7D439ABD" FromRole="GCO_Ficha_Dental" ToRole="GCO_Estado" />
+          <NavigationProperty Name="HistoriaClinica" Relationship="Self.FK__GCO_Ficha__nroHi__7E37BEF6" FromRole="GCO_Ficha_Dental" ToRole="HistoriaClinica" />
+          <NavigationProperty Name="GCO_Plan_De_Tratamiento" Relationship="Self.FK__GCO_Plan___idFic__05D8E0BE" FromRole="GCO_Ficha_Dental" ToRole="GCO_Plan_De_Tratamiento" />
+        </EntityType>
+        <EntityType Name="GCO_Orden_De_Atencion">
+          <Key>
+            <PropertyRef Name="idOrdenAtencion" />
+          </Key>
+          <Property Name="idOrdenAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idPlanTratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idTipoAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegOA" Type="DateTime" Precision="0" />
+          <Property Name="fechaModOA" Type="DateTime" Precision="0" />
+          <Property Name="nroOrdenPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="numOrdenAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GCO_Estado" Relationship="Self.FK__GCO_Orden__idEst__7F2BE32F" FromRole="GCO_Orden_De_Atencion" ToRole="GCO_Estado" />
+          <NavigationProperty Name="GCO_Tipo_Atencion" Relationship="Self.FK__GCO_Orden__idTip__01142BA1" FromRole="GCO_Orden_De_Atencion" ToRole="GCO_Tipo_Atencion" />
+          <NavigationProperty Name="GCO_Orden_De_Pago" Relationship="Self.FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago" FromRole="GCO_Orden_De_Atencion" ToRole="GCO_Orden_De_Pago" />
+          <NavigationProperty Name="GCO_Plan_De_Tratamiento" Relationship="Self.FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento" FromRole="GCO_Orden_De_Atencion" ToRole="GCO_Plan_De_Tratamiento" />
+        </EntityType>
+        <EntityType Name="GCO_Orden_De_Pago">
+          <Key>
+            <PropertyRef Name="nroOrdenPago" />
+          </Key>
+          <Property Name="nroOrdenPago" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="precioTotOP" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="descuentoOP" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="fechaRegOP" Type="DateTime" Precision="0" />
+          <Property Name="fechaModOP" Type="DateTime" Precision="0" />
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GCO_Estado" Relationship="Self.FK__GCO_Orden__idEst__02084FDA" FromRole="GCO_Orden_De_Pago" ToRole="GCO_Estado" />
+          <NavigationProperty Name="GCO_Orden_De_Atencion" Relationship="Self.FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago" FromRole="GCO_Orden_De_Pago" ToRole="GCO_Orden_De_Atencion" />
+        </EntityType>
+        <EntityType Name="GCO_Plan_De_Tratamiento">
+          <Key>
+            <PropertyRef Name="idPlanTratamiento" />
+          </Key>
+          <Property Name="idPlanTratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idFichaDental" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descPlanTratamiento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegPT" Type="DateTime" Precision="0" />
+          <Property Name="fechaModPT" Type="DateTime" Precision="0" />
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GCO_Estado" Relationship="Self.FK__GCO_Plan___idEst__04E4BC85" FromRole="GCO_Plan_De_Tratamiento" ToRole="GCO_Estado" />
+          <NavigationProperty Name="GCO_Ficha_Dental" Relationship="Self.FK__GCO_Plan___idFic__05D8E0BE" FromRole="GCO_Plan_De_Tratamiento" ToRole="GCO_Ficha_Dental" />
+          <NavigationProperty Name="GCO_Orden_De_Atencion" Relationship="Self.FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento" FromRole="GCO_Plan_De_Tratamiento" ToRole="GCO_Orden_De_Atencion" />
+        </EntityType>
+        <EntityType Name="GCO_Solicitud_De_Insumos">
+          <Key>
+            <PropertyRef Name="idSolicitudInsumos" />
+          </Key>
+          <Property Name="idSolicitudInsumos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idEstado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="observacionSI" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegSI" Type="DateTime" Precision="0" />
+          <Property Name="nroIdentificProf" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="GCO_Estado" Relationship="Self.FK__GCO_Solic__idEst__07C12930" FromRole="GCO_Solicitud_De_Insumos" ToRole="GCO_Estado" />
+          <NavigationProperty Name="GCO_Solicitud_De_Insumos_Detalle" Relationship="Self.FK__GCO_Solic__idSol__0A9D95DB" FromRole="GCO_Solicitud_De_Insumos" ToRole="GCO_Solicitud_De_Insumos_Detalle" />
+          <NavigationProperty Name="Profesional" Relationship="Self.FK__GCO_Solic__nroId__08B54D69" FromRole="GCO_Solicitud_De_Insumos" ToRole="Profesional" />
+        </EntityType>
+        <EntityType Name="GCO_Solicitud_De_Insumos_Detalle">
+          <Key>
+            <PropertyRef Name="idSolInsumDet" />
+          </Key>
+          <Property Name="idSolInsumDet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idSolicitudInsumos" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="codArticulo" Type="Int32" Nullable="false" />
+          <Property Name="cantidadInsumo" Type="Int32" />
+          <Property Name="fechaRegSID" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Articulo" Relationship="Self.FK__GCO_Solic__codAr__09A971A2" FromRole="GCO_Solicitud_De_Insumos_Detalle" ToRole="Articulo" />
+          <NavigationProperty Name="GCO_Solicitud_De_Insumos" Relationship="Self.FK__GCO_Solic__idSol__0A9D95DB" FromRole="GCO_Solicitud_De_Insumos_Detalle" ToRole="GCO_Solicitud_De_Insumos" />
+        </EntityType>
+        <EntityType Name="GCO_Tipo_Atencion">
+          <Key>
+            <PropertyRef Name="idTipoAtencion" />
+          </Key>
+          <Property Name="idTipoAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="descTipoAtencion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estadoTipoAtencion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaRegTA" Type="DateTime" Precision="0" />
+          <Property Name="fechaModTA" Type="DateTime" Precision="0" />
+          <Property Name="precioTipoAtencion" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="GCO_Orden_De_Atencion" Relationship="Self.FK__GCO_Orden__idTip__01142BA1" FromRole="GCO_Tipo_Atencion" ToRole="GCO_Orden_De_Atencion" />
+        </EntityType>
+        <EntityType Name="HistoriaClinica">
+          <Key>
+            <PropertyRef Name="nroHistoria" />
+          </Key>
+          <Property Name="nroHistoria" Type="Int32" Nullable="false" />
+          <Property Name="idPaciente" Type="Int32" />
+          <Property Name="grupoSanguineo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="observacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCreacion" Type="DateTime" Precision="0" />
+          <Property Name="fechaActualizacion" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="GCO_Ficha_Dental" Relationship="Self.FK__GCO_Ficha__nroHi__7E37BEF6" FromRole="HistoriaClinica" ToRole="GCO_Ficha_Dental" />
+          <NavigationProperty Name="Paciente" Relationship="Self.FK__HistoriaC__idPac__0B91BA14" FromRole="HistoriaClinica" ToRole="Paciente" />
+        </EntityType>
+        <EntityType Name="Paciente">
+          <Key>
+            <PropertyRef Name="idPaciente" />
+          </Key>
+          <Property Name="idPaciente" Type="Int32" Nullable="false" />
+          <Property Name="TipoDocIdentidad" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="NumDocIdentidad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombresPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apePatPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apeMatPaciente" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaNacPaciente" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaisNacPaciente" Type="Binary" MaxLength="50" FixedLength="false" />
+          <Property Name="edad" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="sexo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK__Cita__idPaciente__7B5B524B" FromRole="Paciente" ToRole="Cita" />
+          <NavigationProperty Name="HistoriaClinica" Relationship="Self.FK__HistoriaC__idPac__0B91BA14" FromRole="Paciente" ToRole="HistoriaClinica" />
+        </EntityType>
+        <EntityType Name="Profesional">
+          <Key>
+            <PropertyRef Name="nroIdentificProf" />
+          </Key>
+          <Property Name="nroIdentificProf" Type="Int32" Nullable="false" />
+          <Property Name="tipoDocIdentidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="numDocIdentidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdEspecialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombresProf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apePatProf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apeMatProf" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fechaNacProf" Type="DateTime" Precision="0" />
+          <Property Name="sexo" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="distrito" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departamento" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nroColegiatura" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cita" Relationship="Self.FK__Cita__nroIdentif__7C4F7684" FromRole="Profesional" ToRole="Cita" />
+          <NavigationProperty Name="GCO_Especialidad" Relationship="Self.FK__Profesion__IdEsp__0C85DE4D" FromRole="Profesional" ToRole="GCO_Especialidad" />
+          <NavigationProperty Name="GCO_Solicitud_De_Insumos" Relationship="Self.FK__GCO_Solic__nroId__08B54D69" FromRole="Profesional" ToRole="GCO_Solicitud_De_Insumos" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK__GCO_Solic__codAr__09A971A2">
+          <End Role="Articulo" Type="Self.Articulo" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos_Detalle" Type="Self.GCO_Solicitud_De_Insumos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulo">
+              <PropertyRef Name="codArticulo" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos_Detalle">
+              <PropertyRef Name="codArticulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__idConsulto__797309D9">
+          <End Role="GCO_Consultorio" Type="Self.GCO_Consultorio" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Consultorio">
+              <PropertyRef Name="idConsultorio" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idConsultorio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__idEspecial__7A672E12">
+          <End Role="GCO_Especialidad" Type="Self.GCO_Especialidad" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Especialidad">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__idPaciente__7B5B524B">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="idPaciente" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="idPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cita__nroIdentif__7C4F7684">
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+          <End Role="Cita" Type="Self.Cita" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="nroIdentificProf" />
+            </Principal>
+            <Dependent Role="Cita">
+              <PropertyRef Name="nroIdentificProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Profesion__IdEsp__0C85DE4D">
+          <End Role="GCO_Especialidad" Type="Self.GCO_Especialidad" Multiplicity="1" />
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Especialidad">
+              <PropertyRef Name="idEspecialidad" />
+            </Principal>
+            <Dependent Role="Profesional">
+              <PropertyRef Name="IdEspecialidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Ficha__idEst__7D439ABD">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Ficha_Dental">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idEst__02084FDA">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Pago" Type="Self.GCO_Orden_De_Pago" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Pago">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idEst__7F2BE32F">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Plan___idEst__04E4BC85">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="0..1" />
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__idEst__07C12930">
+          <End Role="GCO_Estado" Type="Self.GCO_Estado" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Estado">
+              <PropertyRef Name="idEstado" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="idEstado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Ficha__nroHi__7E37BEF6">
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="1" />
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HistoriaClinica">
+              <PropertyRef Name="nroHistoria" />
+            </Principal>
+            <Dependent Role="GCO_Ficha_Dental">
+              <PropertyRef Name="nroHistoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Plan___idFic__05D8E0BE">
+          <End Role="GCO_Ficha_Dental" Type="Self.GCO_Ficha_Dental" Multiplicity="1" />
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Ficha_Dental">
+              <PropertyRef Name="idFichaDental" />
+            </Principal>
+            <Dependent Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idFichaDental" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Orden__idTip__01142BA1">
+          <End Role="GCO_Tipo_Atencion" Type="Self.GCO_Tipo_Atencion" Multiplicity="1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Tipo_Atencion">
+              <PropertyRef Name="idTipoAtencion" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idTipoAtencion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago">
+          <End Role="GCO_Orden_De_Pago" Type="Self.GCO_Orden_De_Pago" Multiplicity="0..1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Orden_De_Pago">
+              <PropertyRef Name="nroOrdenPago" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="nroOrdenPago" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento">
+          <End Role="GCO_Plan_De_Tratamiento" Type="Self.GCO_Plan_De_Tratamiento" Multiplicity="1" />
+          <End Role="GCO_Orden_De_Atencion" Type="Self.GCO_Orden_De_Atencion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Plan_De_Tratamiento">
+              <PropertyRef Name="idPlanTratamiento" />
+            </Principal>
+            <Dependent Role="GCO_Orden_De_Atencion">
+              <PropertyRef Name="idPlanTratamiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__idSol__0A9D95DB">
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos_Detalle" Type="Self.GCO_Solicitud_De_Insumos_Detalle" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="idSolicitudInsumos" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos_Detalle">
+              <PropertyRef Name="idSolicitudInsumos" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GCO_Solic__nroId__08B54D69">
+          <End Role="Profesional" Type="Self.Profesional" Multiplicity="1" />
+          <End Role="GCO_Solicitud_De_Insumos" Type="Self.GCO_Solicitud_De_Insumos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profesional">
+              <PropertyRef Name="nroIdentificProf" />
+            </Principal>
+            <Dependent Role="GCO_Solicitud_De_Insumos">
+              <PropertyRef Name="nroIdentificProf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HistoriaC__idPac__0B91BA14">
+          <End Role="Paciente" Type="Self.Paciente" Multiplicity="0..1" />
+          <End Role="HistoriaClinica" Type="Self.HistoriaClinica" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paciente">
+              <PropertyRef Name="idPaciente" />
+            </Principal>
+            <Dependent Role="HistoriaClinica">
+              <PropertyRef Name="idPaciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RicardoPalmaBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulo" EntityType="Self.Articulo" />
+          <EntitySet Name="Cita" EntityType="Self.Cita" />
+          <EntitySet Name="GCO_Consultorio" EntityType="Self.GCO_Consultorio" />
+          <EntitySet Name="GCO_Especialidad" EntityType="Self.GCO_Especialidad" />
+          <EntitySet Name="GCO_Estado" EntityType="Self.GCO_Estado" />
+          <EntitySet Name="GCO_Ficha_Dental" EntityType="Self.GCO_Ficha_Dental" />
+          <EntitySet Name="GCO_Orden_De_Atencion" EntityType="Self.GCO_Orden_De_Atencion" />
+          <EntitySet Name="GCO_Orden_De_Pago" EntityType="Self.GCO_Orden_De_Pago" />
+          <EntitySet Name="GCO_Plan_De_Tratamiento" EntityType="Self.GCO_Plan_De_Tratamiento" />
+          <EntitySet Name="GCO_Solicitud_De_Insumos" EntityType="Self.GCO_Solicitud_De_Insumos" />
+          <EntitySet Name="GCO_Solicitud_De_Insumos_Detalle" EntityType="Self.GCO_Solicitud_De_Insumos_Detalle" />
+          <EntitySet Name="GCO_Tipo_Atencion" EntityType="Self.GCO_Tipo_Atencion" />
+          <EntitySet Name="HistoriaClinica" EntityType="Self.HistoriaClinica" />
+          <EntitySet Name="Paciente" EntityType="Self.Paciente" />
+          <EntitySet Name="Profesional" EntityType="Self.Profesional" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK__GCO_Solic__codAr__09A971A2" Association="Self.FK__GCO_Solic__codAr__09A971A2">
+            <End Role="Articulo" EntitySet="Articulo" />
+            <End Role="GCO_Solicitud_De_Insumos_Detalle" EntitySet="GCO_Solicitud_De_Insumos_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__idConsulto__797309D9" Association="Self.FK__Cita__idConsulto__797309D9">
+            <End Role="GCO_Consultorio" EntitySet="GCO_Consultorio" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__idEspecial__7A672E12" Association="Self.FK__Cita__idEspecial__7A672E12">
+            <End Role="GCO_Especialidad" EntitySet="GCO_Especialidad" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__idPaciente__7B5B524B" Association="Self.FK__Cita__idPaciente__7B5B524B">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cita__nroIdentif__7C4F7684" Association="Self.FK__Cita__nroIdentif__7C4F7684">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="Cita" EntitySet="Cita" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Profesion__IdEsp__0C85DE4D" Association="Self.FK__Profesion__IdEsp__0C85DE4D">
+            <End Role="GCO_Especialidad" EntitySet="GCO_Especialidad" />
+            <End Role="Profesional" EntitySet="Profesional" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Ficha__idEst__7D439ABD" Association="Self.FK__GCO_Ficha__idEst__7D439ABD">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idEst__02084FDA" Association="Self.FK__GCO_Orden__idEst__02084FDA">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Orden_De_Pago" EntitySet="GCO_Orden_De_Pago" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idEst__7F2BE32F" Association="Self.FK__GCO_Orden__idEst__7F2BE32F">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Plan___idEst__04E4BC85" Association="Self.FK__GCO_Plan___idEst__04E4BC85">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__idEst__07C12930" Association="Self.FK__GCO_Solic__idEst__07C12930">
+            <End Role="GCO_Estado" EntitySet="GCO_Estado" />
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Ficha__nroHi__7E37BEF6" Association="Self.FK__GCO_Ficha__nroHi__7E37BEF6">
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Plan___idFic__05D8E0BE" Association="Self.FK__GCO_Plan___idFic__05D8E0BE">
+            <End Role="GCO_Ficha_Dental" EntitySet="GCO_Ficha_Dental" />
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Orden__idTip__01142BA1" Association="Self.FK__GCO_Orden__idTip__01142BA1">
+            <End Role="GCO_Tipo_Atencion" EntitySet="GCO_Tipo_Atencion" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago" Association="Self.FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago">
+            <End Role="GCO_Orden_De_Pago" EntitySet="GCO_Orden_De_Pago" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento" Association="Self.FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento">
+            <End Role="GCO_Plan_De_Tratamiento" EntitySet="GCO_Plan_De_Tratamiento" />
+            <End Role="GCO_Orden_De_Atencion" EntitySet="GCO_Orden_De_Atencion" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__idSol__0A9D95DB" Association="Self.FK__GCO_Solic__idSol__0A9D95DB">
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+            <End Role="GCO_Solicitud_De_Insumos_Detalle" EntitySet="GCO_Solicitud_De_Insumos_Detalle" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GCO_Solic__nroId__08B54D69" Association="Self.FK__GCO_Solic__nroId__08B54D69">
+            <End Role="Profesional" EntitySet="Profesional" />
+            <End Role="GCO_Solicitud_De_Insumos" EntitySet="GCO_Solicitud_De_Insumos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HistoriaC__idPac__0B91BA14" Association="Self.FK__HistoriaC__idPac__0B91BA14">
+            <End Role="Paciente" EntitySet="Paciente" />
+            <End Role="HistoriaClinica" EntitySet="HistoriaClinica" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RicardoPalmaBDModelStoreContainer" CdmEntityContainer="RicardoPalmaBDEntities">
+          <EntitySetMapping Name="Articulo">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.Articulo">
+              <MappingFragment StoreEntitySet="Articulo">
+                <ScalarProperty Name="codArticulo" ColumnName="codArticulo" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
+                <ScalarProperty Name="TipoArticulo" ColumnName="TipoArticulo" />
+                <ScalarProperty Name="costosxUM" ColumnName="costosxUM" />
+                <ScalarProperty Name="fechaRegArticulo" ColumnName="fechaRegArticulo" />
+                <ScalarProperty Name="fechaModArticulo" ColumnName="fechaModArticulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cita">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.Cita">
+              <MappingFragment StoreEntitySet="Cita">
+                <ScalarProperty Name="nroCita" ColumnName="nroCita" />
+                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+                <ScalarProperty Name="nroIdentificProf" ColumnName="nroIdentificProf" />
+                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+                <ScalarProperty Name="fechaCita" ColumnName="fechaCita" />
+                <ScalarProperty Name="horaCita" ColumnName="horaCita" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fechaRegCita" ColumnName="fechaRegCita" />
+                <ScalarProperty Name="fechaModCita" ColumnName="fechaModCita" />
+                <ScalarProperty Name="idConsultorio" ColumnName="idConsultorio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Consultorio">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Consultorio">
+              <MappingFragment StoreEntitySet="GCO_Consultorio">
+                <ScalarProperty Name="idConsultorio" ColumnName="idConsultorio" />
+                <ScalarProperty Name="descConsultorio" ColumnName="descConsultorio" />
+                <ScalarProperty Name="estadoConsultorio" ColumnName="estadoConsultorio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Especialidad">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Especialidad">
+              <MappingFragment StoreEntitySet="GCO_Especialidad">
+                <ScalarProperty Name="idEspecialidad" ColumnName="idEspecialidad" />
+                <ScalarProperty Name="descEspecialidad" ColumnName="descEspecialidad" />
+                <ScalarProperty Name="fechaRegEspec" ColumnName="fechaRegEspec" />
+                <ScalarProperty Name="fechaModEspec" ColumnName="fechaModEspec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Estado">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Estado">
+              <MappingFragment StoreEntitySet="GCO_Estado">
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="descEstado" ColumnName="descEstado" />
+                <ScalarProperty Name="paramGrupo" ColumnName="paramGrupo" />
+                <ScalarProperty Name="estadoActivo" ColumnName="estadoActivo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Ficha_Dental">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Ficha_Dental">
+              <MappingFragment StoreEntitySet="GCO_Ficha_Dental">
+                <ScalarProperty Name="idFichaDental" ColumnName="idFichaDental" />
+                <ScalarProperty Name="nroHistoria" ColumnName="nroHistoria" />
+                <ScalarProperty Name="diagnosticoFD" ColumnName="diagnosticoFD" />
+                <ScalarProperty Name="observacionFD" ColumnName="observacionFD" />
+                <ScalarProperty Name="notaAvanceFD" ColumnName="notaAvanceFD" />
+                <ScalarProperty Name="fechaRegFD" ColumnName="fechaRegFD" />
+                <ScalarProperty Name="fechaModFD" ColumnName="fechaModFD" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Orden_De_Atencion">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Orden_De_Atencion">
+              <MappingFragment StoreEntitySet="GCO_Orden_De_Atencion">
+                <ScalarProperty Name="idOrdenAtencion" ColumnName="idOrdenAtencion" />
+                <ScalarProperty Name="idPlanTratamiento" ColumnName="idPlanTratamiento" />
+                <ScalarProperty Name="idTipoAtencion" ColumnName="idTipoAtencion" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="fechaRegOA" ColumnName="fechaRegOA" />
+                <ScalarProperty Name="fechaModOA" ColumnName="fechaModOA" />
+                <ScalarProperty Name="nroOrdenPago" ColumnName="nroOrdenPago" />
+                <ScalarProperty Name="numOrdenAtencion" ColumnName="numOrdenAtencion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Orden_De_Pago">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Orden_De_Pago">
+              <MappingFragment StoreEntitySet="GCO_Orden_De_Pago">
+                <ScalarProperty Name="nroOrdenPago" ColumnName="nroOrdenPago" />
+                <ScalarProperty Name="precioTotOP" ColumnName="precioTotOP" />
+                <ScalarProperty Name="descuentoOP" ColumnName="descuentoOP" />
+                <ScalarProperty Name="fechaRegOP" ColumnName="fechaRegOP" />
+                <ScalarProperty Name="fechaModOP" ColumnName="fechaModOP" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Plan_De_Tratamiento">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Plan_De_Tratamiento">
+              <MappingFragment StoreEntitySet="GCO_Plan_De_Tratamiento">
+                <ScalarProperty Name="idPlanTratamiento" ColumnName="idPlanTratamiento" />
+                <ScalarProperty Name="idFichaDental" ColumnName="idFichaDental" />
+                <ScalarProperty Name="descPlanTratamiento" ColumnName="descPlanTratamiento" />
+                <ScalarProperty Name="fechaRegPT" ColumnName="fechaRegPT" />
+                <ScalarProperty Name="fechaModPT" ColumnName="fechaModPT" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Solicitud_De_Insumos">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Solicitud_De_Insumos">
+              <MappingFragment StoreEntitySet="GCO_Solicitud_De_Insumos">
+                <ScalarProperty Name="idSolicitudInsumos" ColumnName="idSolicitudInsumos" />
+                <ScalarProperty Name="idEstado" ColumnName="idEstado" />
+                <ScalarProperty Name="observacionSI" ColumnName="observacionSI" />
+                <ScalarProperty Name="fechaRegSI" ColumnName="fechaRegSI" />
+                <ScalarProperty Name="nroIdentificProf" ColumnName="nroIdentificProf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Solicitud_De_Insumos_Detalle">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Solicitud_De_Insumos_Detalle">
+              <MappingFragment StoreEntitySet="GCO_Solicitud_De_Insumos_Detalle">
+                <ScalarProperty Name="idSolInsumDet" ColumnName="idSolInsumDet" />
+                <ScalarProperty Name="idSolicitudInsumos" ColumnName="idSolicitudInsumos" />
+                <ScalarProperty Name="codArticulo" ColumnName="codArticulo" />
+                <ScalarProperty Name="cantidadInsumo" ColumnName="cantidadInsumo" />
+                <ScalarProperty Name="fechaRegSID" ColumnName="fechaRegSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GCO_Tipo_Atencion">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.GCO_Tipo_Atencion">
+              <MappingFragment StoreEntitySet="GCO_Tipo_Atencion">
+                <ScalarProperty Name="idTipoAtencion" ColumnName="idTipoAtencion" />
+                <ScalarProperty Name="descTipoAtencion" ColumnName="descTipoAtencion" />
+                <ScalarProperty Name="estadoTipoAtencion" ColumnName="estadoTipoAtencion" />
+                <ScalarProperty Name="fechaRegTA" ColumnName="fechaRegTA" />
+                <ScalarProperty Name="fechaModTA" ColumnName="fechaModTA" />
+                <ScalarProperty Name="precioTipoAtencion" ColumnName="precioTipoAtencion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoriaClinica">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.HistoriaClinica">
+              <MappingFragment StoreEntitySet="HistoriaClinica">
+                <ScalarProperty Name="nroHistoria" ColumnName="nroHistoria" />
+                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+                <ScalarProperty Name="grupoSanguineo" ColumnName="grupoSanguineo" />
+                <ScalarProperty Name="observacion" ColumnName="observacion" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="fechaActualizacion" ColumnName="fechaActualizacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paciente">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.Paciente">
+              <MappingFragment StoreEntitySet="Paciente">
+                <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+                <ScalarProperty Name="TipoDocIdentidad" ColumnName="TipoDocIdentidad" />
+                <ScalarProperty Name="NumDocIdentidad" ColumnName="NumDocIdentidad" />
+                <ScalarProperty Name="nombresPaciente" ColumnName="nombresPaciente" />
+                <ScalarProperty Name="apePatPaciente" ColumnName="apePatPaciente" />
+                <ScalarProperty Name="apeMatPaciente" ColumnName="apeMatPaciente" />
+                <ScalarProperty Name="fechaNacPaciente" ColumnName="fechaNacPaciente" />
+                <ScalarProperty Name="PaisNacPaciente" ColumnName="PaisNacPaciente" />
+                <ScalarProperty Name="edad" ColumnName="edad" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profesional">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.Profesional">
+              <MappingFragment StoreEntitySet="Profesional">
+                <ScalarProperty Name="nroIdentificProf" ColumnName="nroIdentificProf" />
+                <ScalarProperty Name="tipoDocIdentidad" ColumnName="tipoDocIdentidad" />
+                <ScalarProperty Name="numDocIdentidad" ColumnName="numDocIdentidad" />
+                <ScalarProperty Name="IdEspecialidad" ColumnName="IdEspecialidad" />
+                <ScalarProperty Name="nombresProf" ColumnName="nombresProf" />
+                <ScalarProperty Name="apePatProf" ColumnName="apePatProf" />
+                <ScalarProperty Name="apeMatProf" ColumnName="apeMatProf" />
+                <ScalarProperty Name="fechaNacProf" ColumnName="fechaNacProf" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="distrito" ColumnName="distrito" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="nroColegiatura" ColumnName="nroColegiatura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="RicardoPalmaBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
