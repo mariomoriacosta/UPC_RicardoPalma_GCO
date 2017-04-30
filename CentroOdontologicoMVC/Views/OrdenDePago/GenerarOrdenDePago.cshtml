@@ -17,112 +17,112 @@
         <div style="border: 2px solid black">
             <h4>Seleccionar Cita</h4>
 
-            <div class="form-group">
-                <label class="col-xs-2 control-label">Tipo de Documento:</label>
-                <div class="col-xs-8">
-                    <select id="tipoDocumento" name="tipoDocumento" ng-model="tipoDocumento" class="form-control" ng-options="x for (x, y) in tipoDocumento">
-                        <option value="option-1" class="col-xs-2 control-label">DNI</option>
-                        <option value="option-2" class="col-xs-2 control-label">Carnet Extr.</option>
-                        <option value="option-3" class="col-xs-2 control-label">Pasaporte</option>
-                    </select>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Tipo de Documento</label>
+                    <div class="col-xs-8">
+                        <select id="tipoDocumento" name="tipoDocumento" ng-model="tipoDocumento" class="form-control" ng-options="x for (x, y) in tipoDocumento">
+                            <option value="1" class="col-xs-2 control-label">DNI</option>
+                            <option value="2" class="col-xs-2 control-label">Carnet Extr.</option>
+                            <option value="3" class="col-xs-2 control-label">Pasaporte</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.numDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.numDocumento, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.numDocumento, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.numDocumento, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.numDocumento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.numDocumento, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <input type="submit" id="btnBuscarCitas" value="Buscar Citas" class="btn btn-default" onclick="return validate0(this);" />
+                <input type="submit" id="btnBuscarCitas" value="Buscar Citas" class="btn btn-default" onclick="return validate0(this);" />
 
-            @Html.Hidden("IdCitaSeleccionada", Model.IdCitaSeleccionada)
-            @Html.Hidden("estadoProceso", Model.estadoProceso)
-            @Html.Hidden("ItemsSeleccionados", Model.ItemsSeleccionados)
+                @Html.Hidden("IdCitaSeleccionada", Model.IdCitaSeleccionada)
+                @Html.Hidden("estadoProceso", Model.estadoProceso)
+                @Html.Hidden("ItemsSeleccionados", Model.ItemsSeleccionados)
 
-            <table class="table" id="tablaCitas">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.nroCita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.idPaciente)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.nroIdentificProf)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.idEspecialidad)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaCita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.horaCita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.observacion)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaRegCita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaModCita)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CitaSeleccionada.idConsultorio)
-                    </th>
-                    <th></th>
-                </tr>
+                <table class="table" id="tablaCitas">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.nroCita)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.idPaciente)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.nroIdentificProf)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.idEspecialidad)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaCita)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.horaCita)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.observacion)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaRegCita)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaModCita)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.idConsultorio)
+                        </th>
+                        <th></th>
+                    </tr>
 
-                @if (Model.Citas != null)
+                    @if (Model.Citas != null)
                 {
 
                     foreach (var item in Model.Citas)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nroCita)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idPaciente)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.nroIdentificProf)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idEspecialidad)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fechaCita)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.horaCita)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.observacion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fechaRegCita)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.fechaModCita)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idConsultorio)
-                            </td>
-                            <td>
-                                <input type="submit" value="Seleccionar" class="btn btn-default" onclick="validate1(@item.idPaciente);" />
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nroCita)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idPaciente)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.nroIdentificProf)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idEspecialidad)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaCita)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.horaCita)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.observacion)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaRegCita)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.fechaModCita)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.idConsultorio)
+                                </td>
+                                <td>
+                                    <input type="submit" value="Seleccionar" class="btn btn-default" onclick="validate1(@item.idPaciente);" />
+                                </td>
+                            </tr>
+                        }
                     }
-                }
-            </table>
+                </table>
 
 
-        </div>
+</div>
 
 
 
@@ -135,128 +135,162 @@
 
             <h4>Confirmar datos de paciente</h4>
 
+            <table width="100%">
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.idPaciente, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.idPaciente, new { htmlAttributes = new { @class = "form-control", @id = "idPaciente" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.idPaciente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.idPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.idPaciente, new { htmlAttributes = new { @class = "form-control", @id = "idPaciente" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.idPaciente, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.TipoDocIdentidad, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.TipoDocIdentidad, new { htmlAttributes = new { @class = "form-control", @id = "TipoDocIdentidad" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.TipoDocIdentidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.NumDocIdentidad, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.NumDocIdentidad, new { htmlAttributes = new { @class = "form-control", @id = "NumDocIdentidad" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.NumDocIdentidad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.TipoDocIdentidad, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.TipoDocIdentidad, new { htmlAttributes = new { @class = "form-control", @id = "TipoDocIdentidad" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.TipoDocIdentidad, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.nombresPaciente, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.nombresPaciente, new { htmlAttributes = new { @class = "form-control", @id = "nombresPaciente" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.nombresPaciente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.apePatPaciente, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.apePatPaciente, new { htmlAttributes = new { @class = "form-control", @id = "apePatPaciente" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.apePatPaciente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.NumDocIdentidad, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.NumDocIdentidad, new { htmlAttributes = new { @class = "form-control", @id = "NumDocIdentidad" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.NumDocIdentidad, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.apeMatPaciente, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.apeMatPaciente, new { htmlAttributes = new { @class = "form-control", @id = "apeMatPaciente" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.apeMatPaciente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.fechaNacPaciente, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.fechaNacPaciente, new { htmlAttributes = new { @class = "form-control", @id = "fechaNacPaciente" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.fechaNacPaciente, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.nombresPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.nombresPaciente, new { htmlAttributes = new { @class = "form-control", @id = "nombresPaciente" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.nombresPaciente, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.edad, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.edad, new { htmlAttributes = new { @class = "form-control", @id = "edad" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.edad, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.sexo, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.sexo, new { htmlAttributes = new { @class = "form-control", @id = "sexo" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.sexo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.apePatPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.apePatPaciente, new { htmlAttributes = new { @class = "form-control", @id = "apePatPaciente" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.apePatPaciente, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.telefono, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.telefono, new { htmlAttributes = new { @class = "form-control", @id = "telefono" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.telefono, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.direccion, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.direccion, new { htmlAttributes = new { @class = "form-control", @id = "direccion" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.direccion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.apeMatPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.apeMatPaciente, new { htmlAttributes = new { @class = "form-control", @id = "apeMatPaciente" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.apeMatPaciente, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.distrito, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.distrito, new { htmlAttributes = new { @class = "form-control", @id = "distrito" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.distrito, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.provincia, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.provincia, new { htmlAttributes = new { @class = "form-control", @id = "provincia" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.provincia, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.fechaNacPaciente, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.fechaNacPaciente, new { htmlAttributes = new { @class = "form-control", @id = "fechaNacPaciente" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.fechaNacPaciente, "", new { @class = "text-danger" })
-                </div>
-            </div>
+                    <td width="50%">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Paciente.departamento, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Paciente.departamento, new { htmlAttributes = new { @class = "form-control", @id = "departamento" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.departamento, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.edad, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.edad, new { htmlAttributes = new { @class = "form-control", @id = "edad" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.edad, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.sexo, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.sexo, new { htmlAttributes = new { @class = "form-control", @id = "sexo" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.sexo, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.telefono, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.telefono, new { htmlAttributes = new { @class = "form-control", @id = "telefono" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.telefono, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.direccion, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.direccion, new { htmlAttributes = new { @class = "form-control", @id = "direccion" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.direccion, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.distrito, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.distrito, new { htmlAttributes = new { @class = "form-control", @id = "distrito" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.distrito, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.provincia, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.provincia, new { htmlAttributes = new { @class = "form-control", @id = "provincia" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.provincia, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Paciente.departamento, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Paciente.departamento, new { htmlAttributes = new { @class = "form-control", @id = "departamento" } })
-                    @Html.ValidationMessageFor(model => model.Paciente.departamento, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
+           <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" id="btnConfirmarPaciente" value="Confirmar datos" class="btn btn-default" onclick="validate2();" />
                 </div>
             </div>
-
-
         </div>
-
 
         <hr />
 
@@ -317,7 +351,7 @@
 
         <div>
             @Html.ActionLink("Back to List", "Index")
-            <input type="submit" value="Generar Orden de Pago" class="btn btn-default" onclick="return validate4(this);" />
+            <input type="submit" id="btnGenerarOrdenDePago" value="Generar Orden de Pago" class="btn btn-default" onclick="return validate4(this);" />
         </div>
 </div>
 }
@@ -334,17 +368,59 @@
                 var estadoProceso = @Html.Raw(Json.Encode(Model.estadoProceso));
                 //alert(estadoProceso);
                 if (estadoProceso == 0) {
+
                     $('#tablaCitas').prop('hidden', true);$('#tablaCitas').prop('hidden', true);
+                    document.getElementById("btnConfirmarPaciente").disabled = true;
+                    document.getElementById("btnGenerarOrdenDePago").disabled = true;
+                    $('#idPaciente').prop('readOnly', true);
+                    $('#TipoDocIdentidad').prop('readOnly', true);
+                    $('#NumDocIdentidad').prop('readOnly', true);
+                    $('#nombresPaciente').prop('readOnly', true);
+                    $('#apePatPaciente').prop('readOnly', true);
+                    $('#apeMatPaciente').prop('readOnly', true);
+                    $('#fechaNacPaciente').prop('readOnly', true);
+                    $('#edad').prop('readOnly', true);
+                    $('#sexo').prop('readOnly', true);
+                    $('#telefono').prop('readOnly', true);
+                    $('#direccion').prop('readOnly', true);
+                    $('#distrito').prop('readOnly', true);
+                    $('#provincia').prop('readOnly', true);
+                    $('#departamento').prop('readOnly', true);
+
+                    if (@Html.Raw(Json.Encode(Model.numDocumento)) != "" && @Html.Raw(Json.Encode(Model.Citas)) == null) {
+                        alert("No hay citas");
+                    }
+
                 } else if (estadoProceso == 1) {
+
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
-                    $('#tipoDocumento').prop('readOnly', true);
+                    document.getElementById("btnBuscarCitas").disabled = true;
+                    document.getElementById("btnConfirmarPaciente").disabled = true;
+                    document.getElementById("tipoDocumento").disabled = true;
+
+                    $('#idPaciente').prop('readOnly', true);
+                    $('#TipoDocIdentidad').prop('readOnly', true);
+                    $('#NumDocIdentidad').prop('readOnly', true);
+                    $('#nombresPaciente').prop('readOnly', true);
+                    $('#apePatPaciente').prop('readOnly', true);
+                    $('#apeMatPaciente').prop('readOnly', true);
+                    $('#fechaNacPaciente').prop('readOnly', true);
+                    $('#edad').prop('readOnly', true);
+                    $('#sexo').prop('readOnly', true);
+                    $('#telefono').prop('readOnly', true);
+                    $('#direccion').prop('readOnly', true);
+                    $('#distrito').prop('readOnly', true);
+                    $('#provincia').prop('readOnly', true);
+                    $('#departamento').prop('readOnly', true);
+
                 } else if (estadoProceso == 2) {
+                    document.getElementById("tipoDocumento").disabled = true;
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
                     $('#tipoDocumento').prop('readOnly', true);
                 } else if (estadoProceso == 3) {
-
+                    document.getElementById("tipoDocumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
@@ -374,7 +450,7 @@
                     document.getElementById("departamento").value = @Html.Raw(Json.Encode(Model.Paciente.departamento));
 
                 } else if (estadoProceso == 4) {
-
+                    document.getElementById("tipoDocumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     document.getElementById("btnConfirmarPaciente").disabled = true;
@@ -396,7 +472,7 @@
                     $('#provincia').prop('readOnly', true);
                     $('#departamento').prop('readOnly', true);
                 } else if (estadoProceso == 5) {
-
+                    document.getElementById("tipoDocumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     document.getElementById("btnConfirmarPaciente").disabled = true;
@@ -426,11 +502,16 @@
         });
 
         function validate0() {
+
+            var e = document.getElementById("tipoDocumento");
+            var strUser = e.options[e.selectedIndex].value;
+
             if (document.getElementById("numDocumento").value == "") {
                 alert("Debe ingresar el tipo de documento y el número de documento");
                 return false;
             }
             document.getElementById('estadoProceso').value = 0;
+
             return true;
         }
 
@@ -462,7 +543,7 @@
             }else{
                 alert("Debe seleccionar al menos un ítem");
                 return false;
-            }            
+            }
         }
 
     </script>

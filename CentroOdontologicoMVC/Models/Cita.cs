@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
@@ -8,46 +9,46 @@ namespace CentroOdontologicoMVC.Models
 {
     public class Cita
     {
-        [JsonProperty("nroCita")]
+        [DisplayName("Número de Cita")]
         public string nroCita { get; set; }
 
-        [JsonProperty("idPaciente")]
+        [DisplayName("Id de Paciente")]
         public Nullable<int> idPaciente { get; set; }
 
-        [JsonProperty("nroIdentificProf")]
+        [DisplayName("Id Profesional")]
         public int nroIdentificProf { get; set; }
 
-        [JsonProperty("idEspecialidad")]
+        [DisplayName("Id Especialidad")]
         public string idEspecialidad { get; set; }
 
-        [JsonProperty("fechaCita")]
+        [DisplayName("Fecha Cita")]
         public Nullable<System.DateTime> fechaCita { get; set; }
 
-        [JsonProperty("horaCita")]
+        [DisplayName("Hora Cita")]
         public Nullable<System.DateTime> horaCita { get; set; }
 
-        [JsonProperty("observacion")]
+        [DisplayName("Observación")]
         public string observacion { get; set; }
 
-        [JsonProperty("fechaRegCita")]
+        [DisplayName("Fecha de registro")]
         public System.DateTime fechaRegCita { get; set; }
 
-        [JsonProperty("fechaModCita")]
+        [DisplayName("Fecha de modificación")]
         public Nullable<System.DateTime> fechaModCita { get; set; }
 
-        [JsonProperty("idConsultorio")]
+        [DisplayName("Id Consultorio")]
         public string idConsultorio { get; set; }
 
-        [JsonProperty("GCO_Consultorio")]
+        [DisplayName("Consultorio")]
         public virtual GCO_Consultorio GCO_Consultorio { get; set; }
 
-        [JsonProperty("GCO_Especialidad")]
+        [DisplayName("Especialidad")]
         public virtual GCO_Especialidad GCO_Especialidad { get; set; }
 
-        [JsonProperty("Paciente")]
+        [DisplayName("Paciente")]
         public virtual Paciente Paciente { get; set; }
 
-        [JsonProperty("Profesional")]
+        [DisplayName("Profesional")]
         public virtual Profesional Profesional { get; set; }
     }
 }

@@ -82,7 +82,7 @@ namespace CentroOdontologicoMVC.Controllers
             generarOrdenDePagoModel.OrdenDePago = OrdenDePago;
             generarOrdenDePagoModel.ItemsSeleccionados = "";
             //generarOrdenDePagoModel.listaTipoDocumento = listaTipoDocumento;
-
+            @ViewBag.Message = "";
             return View(generarOrdenDePagoModel);
         }
 
@@ -98,7 +98,7 @@ namespace CentroOdontologicoMVC.Controllers
                     client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("cita/" + generarOrdenDePagoModel.numDocumento);
+                    HttpResponseMessage Res = await client.GetAsync("cita/" + generarOrdenDePagoModel.numDocumento+"/"+ generarOrdenDePagoModel.tipoDOcumento);
 
                     if (Res.IsSuccessStatusCode)
                     {
@@ -111,20 +111,19 @@ namespace CentroOdontologicoMVC.Controllers
                         generarOrdenDePagoModel.estadoProceso = 1;
 
                         generarOrdenDePagoModel.Citas = listado;
-                        @ViewBag.Message = "Sí hay citas";
                         return View(generarOrdenDePagoModel);
                     }else
                     {
                         generarOrdenDePagoModel.estadoProceso = 0;
                         @ViewBag.Message = "No hay citas";
+                        return View(generarOrdenDePagoModel);
                     }
                 }              
             }
             else if (generarOrdenDePagoModel.estadoProceso == 1)
             {
 
-                @ViewBag.Message = "aca agrego el paciente";
-
+                @ViewBag.Message = "";
 
                 generarOrdenDePagoModel.estadoProceso = 2;
 
@@ -161,7 +160,7 @@ namespace CentroOdontologicoMVC.Controllers
             }
             else if (generarOrdenDePagoModel.estadoProceso == 2)
             {
-
+                @ViewBag.Message = "";
             }
             else if (generarOrdenDePagoModel.estadoProceso == 3)
             {
@@ -199,12 +198,12 @@ namespace CentroOdontologicoMVC.Controllers
                         @ViewBag.Message = "No se encontró un paciente con el id: " + generarOrdenDePagoModel.IdCitaSeleccionada;
                     }
                 }
-
+                @ViewBag.Message = "";
                 return View(generarOrdenDePagoModel);
             }
             else if (generarOrdenDePagoModel.estadoProceso == 4)
             {
-
+                @ViewBag.Message = "";
             }
             else if (generarOrdenDePagoModel.estadoProceso == 5)
             {
@@ -248,32 +247,23 @@ namespace CentroOdontologicoMVC.Controllers
                     }
                 }
 
-                
+                @ViewBag.Message = "";
 
                 return View(generarOrdenDePagoModel);
             }
             else if (generarOrdenDePagoModel.estadoProceso == 6)
             {
                 //Genrar la orden de pago y regresar al index
-
-                GCO_Orden_De_Pago o = new GCO_Orden_De_Pago();
-                o.nroOrdenPago = "2";
-
-                //foreach (var item in generarOrdenDePagoModel.OrdenDeAtencion)
-                //{
-                //    o.idOrdenAtencion = item.idOrdenAtencion;
-                //}
-
-                o.nroIdentificProf = 1;
-                o.precioTotOP = ViewBag.PrecioAcumulado;
-                o.descuentoOP = 0;
-
+                @ViewBag.Message = "";
                 DateTime dt = new DateTime();
 
+                GCO_Orden_De_Pago o = new GCO_Orden_De_Pago();
+                o.nroOrdenPago = "4";
+                o.descuentoOP = 0;
                 o.fechaRegOP = dt.Date;
                 o.fechaModOP = dt.Date;
                 o.idEstado = "1";
-                
+                o.precioTotOP = 100;
                 CreateAsync(o);
 
                 return RedirectToAction("Index","OrdenDePago");
@@ -292,11 +282,10 @@ namespace CentroOdontologicoMVC.Controllers
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.PostAsJsonAsync("api/GCO_Orden_De_Pago", o);
+                HttpResponseMessage response = await client.PostAsJsonAsync("ordenDePago", o);
                 return null;
             }
         }
-
 
     }
 }

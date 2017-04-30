@@ -42,12 +42,12 @@ namespace GCO.WebApi.Controllers
             }
         }
 
-        [Route("{id}")]
-        public List<CitaModel> GetForId(int id)
+        [Route("{numdoc}/{tipodoc}")]
+        public List<CitaModel> GetForId(string numdoc,string tipodoc)
         {
             try
             {
-                var items = from b in LNCita.ListarTodos() where b.idPaciente == id
+                var items = from b in LNCita.ListarTodos() where b.Paciente.NumDocIdentidad == numdoc && b.Paciente.TipoDocIdentidad == tipodoc
                             select new CitaModel()
                             {
                                 nroCita = b.nroCita,

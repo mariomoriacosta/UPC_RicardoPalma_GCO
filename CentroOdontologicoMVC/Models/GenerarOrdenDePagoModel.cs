@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using static CentroOdontologicoMVC.Controllers.OrdenDePagoController;
 
 namespace CentroOdontologicoMVC.Models
 {
@@ -15,9 +17,11 @@ namespace CentroOdontologicoMVC.Models
         //public List<System.Web.Mvc.SelectListItem> listaTipoDocumento { get; set; }
 
         //tipo y numero de documento seleccionado
+        [DisplayName("Tipo de documento")]
         public string tipoDOcumento { get; set; }
 
         //tipo y numero de documento seleccionado
+        [DisplayName("Número de documento")]
         public string numDocumento { get; set; }
 
         //lista de citas

@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace GCO.WebApi.Controllers
 {
@@ -74,6 +76,7 @@ namespace GCO.WebApi.Controllers
             }
         }
 
+        [Route("")]
         [HttpPost]
         public IHttpActionResult Create([FromBody] GCO_Orden_De_PagoModel b)
         {
@@ -94,6 +97,6 @@ namespace GCO.WebApi.Controllers
             return Ok(b);
         }
 
-
+        
     }
 }

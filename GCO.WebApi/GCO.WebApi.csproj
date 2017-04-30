@@ -216,6 +216,8 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\CGO_Orden_De_AtencionController.cs" />
     <Compile Include="Controllers\CitaController.cs" />
+    <Compile Include="Controllers\GCO_ConsultorioController.cs" />
+    <Compile Include="Controllers\GCO_Orden_De_PagoController2.cs" />
     <Compile Include="Controllers\GCO_Orden_De_PagoController.cs" />
     <Compile Include="Controllers\GCO_Plan_De_TratamientoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
