@@ -15,7 +15,7 @@ namespace GCO.Negocio
             return db.GCO_Tipo_Atencion.ToList();
         }
 
-        public static GCO_Tipo_Atencion Obtener(string id)
+        public static GCO_Tipo_Atencion Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
             return db.GCO_Tipo_Atencion.FirstOrDefault(x => x.idTipoAtencion == id);

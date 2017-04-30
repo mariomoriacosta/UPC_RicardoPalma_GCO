@@ -17,14 +17,14 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Profesional()
         {
-            this.Cita = new HashSet<Cita>();
+            this.GCO_Cita = new HashSet<GCO_Cita>();
             this.GCO_Solicitud_De_Insumos = new HashSet<GCO_Solicitud_De_Insumos>();
         }
     
         public int nroIdentificProf { get; set; }
         public string tipoDocIdentidad { get; set; }
         public string numDocIdentidad { get; set; }
-        public string IdEspecialidad { get; set; }
+        public System.Guid IdEspecialidad { get; set; }
         public string nombresProf { get; set; }
         public string apePatProf { get; set; }
         public string apeMatProf { get; set; }
@@ -38,7 +38,7 @@ namespace GCO.Datos
         public string nroColegiatura { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Cita { get; set; }
+        public virtual ICollection<GCO_Cita> GCO_Cita { get; set; }
         public virtual GCO_Especialidad GCO_Especialidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GCO_Solicitud_De_Insumos> GCO_Solicitud_De_Insumos { get; set; }

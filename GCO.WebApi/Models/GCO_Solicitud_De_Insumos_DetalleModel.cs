@@ -7,12 +7,12 @@ namespace GCO.WebApi.Models
 {
     public class GCO_Solicitud_De_Insumos_DetalleModel
     {
-        public string idSolInsumDet { get; set; }
-        public string idSolicitudInsumos { get; set; }
-        public int codArticulo { get; set; }
+        public System.Guid idSolInsumDet { get; set; }
+        public Nullable<System.Guid> idSolicitudInsumos { get; set; }
+        public Nullable<System.Guid> idArticulo { get; set; }
         public Nullable<int> cantidadInsumo { get; set; }
         public Nullable<System.DateTime> fechaRegSID { get; set; }
-        public virtual ArticuloModel Articulo { get; set; }
+        public virtual GCO_ArticuloModel GCO_Articulo { get; set; }
         public virtual GCO_Solicitud_De_InsumosModel GCO_Solicitud_De_Insumos { get; set; }
     }
 }

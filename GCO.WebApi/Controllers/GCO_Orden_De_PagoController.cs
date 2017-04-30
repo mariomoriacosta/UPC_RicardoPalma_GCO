@@ -1,4 +1,5 @@
-﻿using GCO.Datos;
+﻿using AutoMapper;
+using GCO.Datos;
 using GCO.Negocio;
 using GCO.WebApi.Models;
 using System;
@@ -20,17 +21,20 @@ namespace GCO.WebApi.Controllers
         {
             try
             {
+                Mapper.Initialize(cfg => {
+                    cfg.CreateMap<GCO_Estado, GCO_EstadoModel>();
+                });
+
                 var items = from b in LNOrdenDePago.ListarTodos()
                             select new GCO_Orden_De_PagoModel()
                             {
-                                nroOrdenPago = b.nroOrdenPago,
-                                //idOrdenAtencion = b.idOrdenAtencion,
-                                //nroIdentificProf = b.nroIdentificProf,
+                                idOrdenDePago = b.idOrdenDePago,
                                 precioTotOP = b.precioTotOP,
                                 descuentoOP = b.descuentoOP,
                                 fechaRegOP = b.fechaRegOP,
                                 fechaModOP = b.fechaModOP,
-                                idEstado = b.idEstado
+                                idEstado = b.idEstado,
+                                GCO_Estado = Mapper.Map<GCO_EstadoModel>(b.GCO_Estado)
                             };
                 return items.ToList();
             }
@@ -49,8 +53,8 @@ namespace GCO.WebApi.Controllers
         [Route("{id}")]
         public IHttpActionResult GetItem(string id)
         {
-            var item = LNOrdenDePago.Obtener(id);
-            if (item == null)
+            var b = LNOrdenDePago.Obtener(Guid.Parse(id));
+            if (b == null)
             {
                 var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
                 {
@@ -63,14 +67,12 @@ namespace GCO.WebApi.Controllers
             {
                 var newItem = new GCO_Orden_De_PagoModel()
                 {
-                    nroOrdenPago = item.nroOrdenPago,
-                    //idOrdenAtencion = item.idOrdenAtencion,
-                    //nroIdentificProf = item.nroIdentificProf,
-                    precioTotOP = item.precioTotOP,
-                    descuentoOP = item.descuentoOP,
-                    fechaRegOP = item.fechaRegOP,
-                    fechaModOP = item.fechaModOP,
-                    idEstado = item.idEstado
+                    idOrdenDePago = b.idOrdenDePago,
+                    precioTotOP = b.precioTotOP,
+                    descuentoOP = b.descuentoOP,
+                    fechaRegOP = b.fechaRegOP,
+                    fechaModOP = b.fechaModOP,
+                    idEstado = b.idEstado
                 };
                 return Ok(newItem);
             }
@@ -86,7 +88,7 @@ namespace GCO.WebApi.Controllers
             }
 
             var p = new GCO_Orden_De_Pago();
-            p.nroOrdenPago = b.nroOrdenPago;
+            p.idOrdenDePago = b.idOrdenDePago;
             p.precioTotOP = b.precioTotOP;
             p.descuentoOP = b.descuentoOP;
             p.fechaRegOP = b.fechaRegOP;

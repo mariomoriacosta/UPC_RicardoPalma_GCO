@@ -10,7 +10,7 @@ namespace GCO.WebApi.Models
         public int nroIdentificProf { get; set; }
         public string tipoDocIdentidad { get; set; }
         public string numDocIdentidad { get; set; }
-        public string IdEspecialidad { get; set; }
+        public System.Guid IdEspecialidad { get; set; }
         public string nombresProf { get; set; }
         public string apePatProf { get; set; }
         public string apeMatProf { get; set; }
@@ -22,9 +22,8 @@ namespace GCO.WebApi.Models
         public string provincia { get; set; }
         public string departamento { get; set; }
         public string nroColegiatura { get; set; }
-        public virtual ICollection<CitaModel> Cita { get; set; }
+        public virtual ICollection<GCO_CitaModel> GCO_Cita { get; set; }
         public virtual GCO_EspecialidadModel GCO_Especialidad { get; set; }
-        public virtual ICollection<GCO_Orden_De_PagoModel> GCO_Orden_De_Pago { get; set; }
         public virtual ICollection<GCO_Solicitud_De_InsumosModel> GCO_Solicitud_De_Insumos { get; set; }
     }
 }

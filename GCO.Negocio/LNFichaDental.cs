@@ -15,7 +15,7 @@ namespace GCO.Negocio
             return db.GCO_Ficha_Dental.ToList();
         }
 
-        public static GCO_Ficha_Dental Obtener(string id)
+        public static GCO_Ficha_Dental Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
             return db.GCO_Ficha_Dental.FirstOrDefault(x => x.idFichaDental == id);

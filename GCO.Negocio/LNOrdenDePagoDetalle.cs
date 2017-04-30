@@ -7,25 +7,26 @@ using System.Threading.Tasks;
 
 namespace GCO.Negocio
 {
-    public class LNOrdenDePago
+    public class LNOrdenDePagoDetalle
     {
-        public static List<GCO_Orden_De_Pago> ListarTodos()
+        public static List<GCO_Orden_De_Pago_Detalle> ListarTodos()
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.GCO_Orden_De_Pago.ToList();
+            return db.GCO_Orden_De_Pago_Detalle.ToList();
         }
 
-        public static GCO_Orden_De_Pago Obtener(Guid id)
+        public static GCO_Orden_De_Pago_Detalle Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.GCO_Orden_De_Pago.FirstOrDefault(x => x.idOrdenDePago == id);
+            return db.GCO_Orden_De_Pago_Detalle.FirstOrDefault(x => x.idOrdenDePago == id);
         }
 
-        public static void add(GCO_Orden_De_Pago ordenDePago)
+        public static void add(GCO_Orden_De_Pago_Detalle ordenDePago)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            db.GCO_Orden_De_Pago.Add(ordenDePago);
+            db.GCO_Orden_De_Pago_Detalle.Add(ordenDePago);
             db.SaveChanges();
         }
+        
     }
 }

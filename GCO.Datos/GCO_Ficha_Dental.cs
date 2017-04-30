@@ -20,17 +20,17 @@ namespace GCO.Datos
             this.GCO_Plan_De_Tratamiento = new HashSet<GCO_Plan_De_Tratamiento>();
         }
     
-        public string idFichaDental { get; set; }
-        public int nroHistoria { get; set; }
+        public System.Guid idFichaDental { get; set; }
+        public Nullable<System.Guid> idHistoriaClinica { get; set; }
         public string diagnosticoFD { get; set; }
         public string observacionFD { get; set; }
         public string notaAvanceFD { get; set; }
         public Nullable<System.DateTime> fechaRegFD { get; set; }
         public Nullable<System.DateTime> fechaModFD { get; set; }
-        public string idEstado { get; set; }
+        public Nullable<System.Guid> idEstado { get; set; }
     
         public virtual GCO_Estado GCO_Estado { get; set; }
-        public virtual HistoriaClinica HistoriaClinica { get; set; }
+        public virtual GCO_HistoriaClinica GCO_HistoriaClinica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GCO_Plan_De_Tratamiento> GCO_Plan_De_Tratamiento { get; set; }
     }

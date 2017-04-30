@@ -4,42 +4,43 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6647d1a4acf24bf18a4a5c84cc0d11e4" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.Articulo" Width="1.5" PointX="9" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.Cita" Width="1.5" PointX="6" PointY="16.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Consultorio" Width="1.5" PointX="3.75" PointY="15.25" IsExpanded="true" />
+      <Diagram DiagramId="3ece019438384d41aa0bc4039cd49749" Name="Diagram1">
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Articulo" Width="1.5" PointX="9" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Cita" Width="1.5" PointX="6" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Consultorio" Width="1.5" PointX="3.75" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Especialidad" Width="1.5" PointX="1.5" PointY="20" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Estado" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Ficha_Dental" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Orden_De_Atencion" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_HistoriaClinica" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Orden_De_Pago" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Orden_De_Pago_Detalle" Width="1.5" PointX="15.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Paciente" Width="1.5" PointX="1.5" PointY="13.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Plan_De_Tratamiento" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Plan_De_Tratamiento_Detalle" Width="1.5" PointX="13.5" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Solicitud_De_Insumos" Width="1.5" PointX="6" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Solicitud_De_Insumos_Detalle" Width="1.5" PointX="11.25" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Tipo_Atencion" Width="1.5" PointX="8.25" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.HistoriaClinica" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.Paciente" Width="1.5" PointX="1.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RicardoPalmaBDModel.GCO_Tipo_Atencion" Width="1.5" PointX="11.25" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="RicardoPalmaBDModel.Profesional" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="RicardoPalmaBDModel.sysdiagrams" Width="1.5" PointX="5.875" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Solic__codAr__09A971A2" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__Cita__idConsulto__797309D9" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__Cita__idEspecial__7A672E12" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__Cita__idPaciente__7B5B524B" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__Cita__nroIdentif__7C4F7684" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__Profesion__IdEsp__0C85DE4D" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Ficha__idEst__7D439ABD" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Orden__idEst__02084FDA" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Orden__idEst__7F2BE32F" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Plan___idEst__04E4BC85" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Solic__idEst__07C12930" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Ficha__nroHi__7E37BEF6" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Plan___idFic__05D8E0BE" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Orden__idTip__01142BA1" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Atencion_GCO_Orden_De_Pago" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Atencion_GCO_Plan_De_Tratamiento" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Solic__idSol__0A9D95DB" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__GCO_Solic__nroId__08B54D69" ManuallyRouted="false" />
-        <AssociationConnector Association="RicardoPalmaBDModel.FK__HistoriaC__idPac__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Solicitud_De_Insumos_Detalle_GCO_Articulo" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Cita_GCO_Consultorio" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Cita_GCO_Especialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Cita_GCO_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Cita_Profesional" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_Profesional_GCO_Especialidad" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Ficha_Dental_GCO_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Pago_Detalle_GCO_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Pago_GCO_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Plan_De_Tratamiento_GCO_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Solicitud_De_Insumos_GCO_Estado" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Ficha_Dental_GCO_HistoriaClinica" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Plan_De_Tratamiento_GCO_Ficha_Dental" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_HistoriaClinica_GCO_Paciente" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Pago_Detalle_GCO_Orden_De_Pago" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Orden_De_Pago_Detalle_GCO_Plan_De_Tratamiento_Detalle" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Plan_De_Tratamiento_Detalle_GCO_Plan_De_Tratamiento" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Plan_De_Tratamiento_Detalle_GCO_Tipo_Atencion" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Solicitud_De_Insumos_Detalle_GCO_Solicitud_De_Insumos" ManuallyRouted="false" />
+        <AssociationConnector Association="RicardoPalmaBDModel.FK_GCO_Solicitud_De_Insumos_Profesional" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

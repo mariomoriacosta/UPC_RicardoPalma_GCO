@@ -9,16 +9,16 @@ namespace GCO.Negocio
 {
    public class LNArticulo
     {
-        public static List<Articulo> ListarTodos()
+        public static List<GCO_Articulo> ListarTodos()
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.Articulo.ToList();
+            return db.GCO_Articulo.ToList();
         }
 
-        public static Articulo Obtener(int id)
+        public static GCO_Articulo Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.Articulo.Include("GCO_Solicitud_De_Insumos_Detalle").FirstOrDefault(x => x.codArticulo == id);
+            return db.GCO_Articulo.Include("GCO_Solicitud_De_Insumos_Detalle").FirstOrDefault(x => x.idArticulo == id);
         }
     }
 }

@@ -9,22 +9,28 @@ namespace GCO.Negocio
 {
     public class LNPaciente
     {
-        public static List<Paciente> ListarTodos()
+        public static List<GCO_Paciente> ListarTodos()
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.Paciente.ToList();
+            return db.GCO_Paciente.ToList();
         }
 
-        public static Paciente Obtener(int id)
+        public static GCO_Paciente Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.Paciente.FirstOrDefault(x => x.idPaciente == id);
+            return db.GCO_Paciente.FirstOrDefault(x => x.idPaciente == id);
         }
 
-        public static void update(Paciente p)
+        public static GCO_Paciente Obtener(string numDoc, string tipoDoc)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            var pa = db.Paciente.FirstOrDefault(x => x.idPaciente == p.idPaciente);
+            return db.GCO_Paciente.FirstOrDefault(x => x.NumDocIdentidad == numDoc && x.TipoDocIdentidad == tipoDoc);
+        }
+
+        public static void update(GCO_Paciente p)
+        {
+            RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
+            var pa = db.GCO_Paciente.FirstOrDefault(x => x.idPaciente == p.idPaciente);
 
             pa.TipoDocIdentidad = p.TipoDocIdentidad;
             pa.NumDocIdentidad = p.NumDocIdentidad;
@@ -33,7 +39,6 @@ namespace GCO.Negocio
             pa.apeMatPaciente = p.apeMatPaciente;
             pa.fechaNacPaciente = p.fechaNacPaciente;
             pa.PaisNacPaciente = p.PaisNacPaciente;
-            pa.edad = p.edad;
             pa.sexo = p.sexo;
             pa.telefono = p.telefono;
             pa.direccion = p.direccion;

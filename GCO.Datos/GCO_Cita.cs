@@ -12,22 +12,21 @@ namespace GCO.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Cita
+    public partial class GCO_Cita
     {
-        public string nroCita { get; set; }
-        public Nullable<int> idPaciente { get; set; }
-        public int nroIdentificProf { get; set; }
-        public string idEspecialidad { get; set; }
+        public System.Guid idCita { get; set; }
+        public Nullable<System.Guid> idPaciente { get; set; }
+        public Nullable<int> nroIdentificProf { get; set; }
+        public Nullable<System.Guid> idEspecialidad { get; set; }
         public Nullable<System.DateTime> fechaCita { get; set; }
-        public Nullable<System.DateTime> horaCita { get; set; }
         public string observacion { get; set; }
-        public System.DateTime fechaRegCita { get; set; }
+        public Nullable<System.DateTime> fechaRegCita { get; set; }
         public Nullable<System.DateTime> fechaModCita { get; set; }
-        public string idConsultorio { get; set; }
+        public Nullable<System.Guid> idConsultorio { get; set; }
     
         public virtual GCO_Consultorio GCO_Consultorio { get; set; }
         public virtual GCO_Especialidad GCO_Especialidad { get; set; }
-        public virtual Paciente Paciente { get; set; }
+        public virtual GCO_Paciente GCO_Paciente { get; set; }
         public virtual Profesional Profesional { get; set; }
     }
 }

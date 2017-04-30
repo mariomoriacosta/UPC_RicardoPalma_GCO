@@ -17,19 +17,19 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GCO_Plan_De_Tratamiento()
         {
-            this.GCO_Orden_De_Atencion = new HashSet<GCO_Orden_De_Atencion>();
+            this.GCO_Plan_De_Tratamiento_Detalle = new HashSet<GCO_Plan_De_Tratamiento_Detalle>();
         }
     
-        public string idPlanTratamiento { get; set; }
-        public string idFichaDental { get; set; }
+        public System.Guid idPlanTratamiento { get; set; }
+        public Nullable<System.Guid> idFichaDental { get; set; }
         public string descPlanTratamiento { get; set; }
         public Nullable<System.DateTime> fechaRegPT { get; set; }
         public Nullable<System.DateTime> fechaModPT { get; set; }
-        public string idEstado { get; set; }
+        public Nullable<System.Guid> idEstado { get; set; }
     
         public virtual GCO_Estado GCO_Estado { get; set; }
         public virtual GCO_Ficha_Dental GCO_Ficha_Dental { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GCO_Orden_De_Atencion> GCO_Orden_De_Atencion { get; set; }
+        public virtual ICollection<GCO_Plan_De_Tratamiento_Detalle> GCO_Plan_De_Tratamiento_Detalle { get; set; }
     }
 }

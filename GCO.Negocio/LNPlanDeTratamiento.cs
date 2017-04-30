@@ -15,7 +15,7 @@ namespace GCO.Negocio
             return db.GCO_Plan_De_Tratamiento.ToList();
         }
 
-        public static GCO_Plan_De_Tratamiento Obtener(string id)
+        public static GCO_Plan_De_Tratamiento Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
             return db.GCO_Plan_De_Tratamiento.FirstOrDefault(x => x.idPlanTratamiento == id);

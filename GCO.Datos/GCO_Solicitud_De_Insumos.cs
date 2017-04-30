@@ -20,11 +20,11 @@ namespace GCO.Datos
             this.GCO_Solicitud_De_Insumos_Detalle = new HashSet<GCO_Solicitud_De_Insumos_Detalle>();
         }
     
-        public string idSolicitudInsumos { get; set; }
-        public string idEstado { get; set; }
+        public System.Guid idSolicitudInsumos { get; set; }
+        public Nullable<System.Guid> idEstado { get; set; }
         public string observacionSI { get; set; }
         public Nullable<System.DateTime> fechaRegSI { get; set; }
-        public int nroIdentificProf { get; set; }
+        public Nullable<int> nroIdentificProf { get; set; }
     
         public virtual GCO_Estado GCO_Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

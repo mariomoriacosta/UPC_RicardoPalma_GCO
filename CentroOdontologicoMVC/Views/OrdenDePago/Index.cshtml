@@ -52,7 +52,7 @@
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.nroOrdenPago)
+                        @Html.DisplayNameFor(model => model.idOrdenDePago)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.precioTotOP)
@@ -75,7 +75,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.nroOrdenPago)
+                            @Html.DisplayFor(modelItem => item.idOrdenDePago)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.precioTotOP)
@@ -90,7 +90,7 @@
                             @Html.DisplayFor(modelItem => item.fechaModOP)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.idEstado)
+                            @Html.DisplayFor(modelItem => item.GCO_Estado.descEstado)
                         </td>
                     </tr>
                 }

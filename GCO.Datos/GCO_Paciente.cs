@@ -12,24 +12,23 @@ namespace GCO.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class Paciente
+    public partial class GCO_Paciente
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Paciente()
+        public GCO_Paciente()
         {
-            this.Cita = new HashSet<Cita>();
-            this.HistoriaClinica = new HashSet<HistoriaClinica>();
+            this.GCO_Cita = new HashSet<GCO_Cita>();
+            this.GCO_HistoriaClinica = new HashSet<GCO_HistoriaClinica>();
         }
     
-        public int idPaciente { get; set; }
+        public System.Guid idPaciente { get; set; }
         public string TipoDocIdentidad { get; set; }
         public string NumDocIdentidad { get; set; }
         public string nombresPaciente { get; set; }
         public string apePatPaciente { get; set; }
         public string apeMatPaciente { get; set; }
-        public System.DateTime fechaNacPaciente { get; set; }
-        public byte[] PaisNacPaciente { get; set; }
-        public string edad { get; set; }
+        public Nullable<System.DateTime> fechaNacPaciente { get; set; }
+        public string PaisNacPaciente { get; set; }
         public string sexo { get; set; }
         public string telefono { get; set; }
         public string direccion { get; set; }
@@ -38,8 +37,8 @@ namespace GCO.Datos
         public string departamento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Cita { get; set; }
+        public virtual ICollection<GCO_Cita> GCO_Cita { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<HistoriaClinica> HistoriaClinica { get; set; }
+        public virtual ICollection<GCO_HistoriaClinica> GCO_HistoriaClinica { get; set; }
     }
 }

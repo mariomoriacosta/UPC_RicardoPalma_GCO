@@ -15,10 +15,10 @@ namespace GCO.Negocio
             return db.GCO_Solicitud_De_Insumos_Detalle.ToList();
         }
 
-        public static GCO_Solicitud_De_Insumos_Detalle Obtener(string id)
+        public static GCO_Solicitud_De_Insumos_Detalle Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.GCO_Solicitud_De_Insumos_Detalle.FirstOrDefault(x => x.idSolInsumDet == id);
+            return db.GCO_Solicitud_De_Insumos_Detalle.FirstOrDefault(x => x.idSolicitudInsumos == id);
         }
     }
 }

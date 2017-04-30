@@ -20,10 +20,10 @@
                 <div class="form-group">
                     <label class="col-xs-2 control-label">Tipo de Documento</label>
                     <div class="col-xs-8">
-                        <select id="tipoDocumento" name="tipoDocumento" ng-model="tipoDocumento" class="form-control" ng-options="x for (x, y) in tipoDocumento">
-                            <option value="1" class="col-xs-2 control-label">DNI</option>
-                            <option value="2" class="col-xs-2 control-label">Carnet Extr.</option>
-                            <option value="3" class="col-xs-2 control-label">Pasaporte</option>
+                        <select id="tipoDOcumento" name="tipoDOcumento" ng-model="tipoDOcumento" class="form-control" ng-options="x for (x, y) in tipoDOcumento">
+                            <option value="DNI" class="col-xs-2 control-label">DNI</option>
+                            <option value="Carnet Extr." class="col-xs-2 control-label">Carnet Extr.</option>
+                            <option value="Pasaporte" class="col-xs-2 control-label">Pasaporte</option>
                         </select>
                     </div>
                 </div>
@@ -36,16 +36,21 @@
                     </div>
                 </div>
 
-                <input type="submit" id="btnBuscarCitas" value="Buscar Citas" class="btn btn-default" onclick="return validate0(this);" />
+            <div class="form-group">
+                <div class="col-md-6">
+                    <input type="submit" id="btnBuscarCitas" value="Buscar Citas" class="btn btn-default" onclick="return validate0(this);" />
+                </div>
+            </div>
 
                 @Html.Hidden("IdCitaSeleccionada", Model.IdCitaSeleccionada)
                 @Html.Hidden("estadoProceso", Model.estadoProceso)
                 @Html.Hidden("ItemsSeleccionados", Model.ItemsSeleccionados)
+                @Html.Hidden("PrecioAcumuladoTotal", Model.PrecioAcumuladoTotal)
 
                 <table class="table" id="tablaCitas">
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.CitaSeleccionada.nroCita)
+                            @Html.DisplayNameFor(model => model.CitaSeleccionada.idCita)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CitaSeleccionada.idPaciente)
@@ -58,9 +63,6 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CitaSeleccionada.fechaCita)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CitaSeleccionada.horaCita)
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CitaSeleccionada.observacion)
@@ -84,22 +86,19 @@
                     {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.nroCita)
+                                    @Html.DisplayFor(modelItem => item.idCita)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.idPaciente)
+                                    @Html.DisplayFor(modelItem => item.GCO_Paciente.fullname)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.nroIdentificProf)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.idEspecialidad)
+                                    @Html.DisplayFor(modelItem => item.GCO_Especialidad.descEspecialidad)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.fechaCita)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.horaCita)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.observacion)
@@ -111,10 +110,10 @@
                                     @Html.DisplayFor(modelItem => item.fechaModCita)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.idConsultorio)
+                                    @Html.DisplayFor(modelItem => item.GCO_Consultorio.descConsultorio)
                                 </td>
                                 <td>
-                                    <input type="submit" value="Seleccionar" class="btn btn-default" onclick="validate1(@item.idPaciente);" />
+                                    <input type="submit" value="Seleccionar" class="btn btn-default" onclick="validate1('+@item.idCita+');" />
                                 </td>
                             </tr>
                         }
@@ -212,10 +211,10 @@
 
                     <td width="50%">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Paciente.edad, htmlAttributes: new { @class = "control-label col-md-4" })
+                            @Html.LabelFor(model => model.Paciente.departamento, htmlAttributes: new { @class = "control-label col-md-4" })
                             <div class="col-md-6">
-                                @Html.EditorFor(model => model.Paciente.edad, new { htmlAttributes = new { @class = "form-control", @id = "edad" } })
-                                @Html.ValidationMessageFor(model => model.Paciente.edad, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Paciente.departamento, new { htmlAttributes = new { @class = "form-control", @id = "departamento" } })
+                                @Html.ValidationMessageFor(model => model.Paciente.departamento, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </td>
@@ -273,15 +272,7 @@
                         </div>
                     </td>
 
-                    <td width="50%">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Paciente.departamento, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-6">
-                                @Html.EditorFor(model => model.Paciente.departamento, new { htmlAttributes = new { @class = "form-control", @id = "departamento" } })
-                                @Html.ValidationMessageFor(model => model.Paciente.departamento, "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    </td>
+                    
                 </tr>
             </table>
 
@@ -304,42 +295,49 @@
                         @Html.DisplayNameFor(model => model.PlanVacio.idPlanTratamiento)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.OrdenVacio.GCO_Tipo_Atencion.descTipoAtencion)
+                        @Html.DisplayNameFor(model => model.PlanDeTratamientoDetalleVacio.GCO_Tipo_Atencion.descTipoAtencion)
                     </th>                    
                     <th>
-                        @Html.DisplayNameFor(model => model.OrdenVacio.GCO_Tipo_Atencion.precioTipoAtencion)
+                        @Html.DisplayNameFor(model => model.PlanDeTratamientoDetalleVacio.GCO_Tipo_Atencion.precioTipoAtencion)
+                    </th>                    
+                    <th>
+                        @Html.DisplayNameFor(model => model.PlanDeTratamientoDetalleVacio.fechaRegOA)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.OrdenVacio.GCO_Estado.descEstado)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.OrdenVacio.fechaRegOA)
+                        Estado
                     </th>
                     <th></th>
                 </tr>
 
-                @if (Model.OrdenDeAtencion != null)
+                @if (Model.PlanDeTratamientoDetalle != null)
                 {
-                    foreach (var item in Model.OrdenDeAtencion)
+                    foreach (var item in Model.PlanDeTratamientoDetalle)
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.idOrdenAtencion)
+                                @Html.DisplayFor(modelItem => item.idPlanTratamientoDetalle)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.GCO_Tipo_Atencion.descTipoAtencion)
                             </td>                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.GCO_Tipo_Atencion.precioTipoAtencion)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.idEstado)
-                            </td>
+                            </td>                            
                             <td>
                                 @Html.DisplayFor(modelItem => item.fechaRegOA)
                             </td>
                             <td>
-                                <input type="submit" value="Seleccionar" class="btn btn-default" onclick="validate3(@item.idOrdenAtencion);" />
+                                @Html.DisplayFor(modelItem => item.estadoLista)
+                            </td>
+                            <td>
+                                @if (item.estadoLista != "Seleccionado")
+                                {
+                                    <input type="submit" value="Seleccionar" class="btn btn-info" onclick="validate3_1('+@item.idPlanTratamientoDetalle+');" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Deseleccionar" class="btn btn-warning" onclick="validate3_2('+@item.idPlanTratamientoDetalle+');" />
+                                }                                
                             </td>
                         </tr>
                     }
@@ -387,17 +385,20 @@
                     $('#provincia').prop('readOnly', true);
                     $('#departamento').prop('readOnly', true);
 
+                    //document.getElementById("tipoDOcumento").value = @Html.Raw(Json.Encode(Model.tipoDOcumento));
+
                     if (@Html.Raw(Json.Encode(Model.numDocumento)) != "" && @Html.Raw(Json.Encode(Model.Citas)) == null) {
                         alert("No hay citas");
                     }
 
                 } else if (estadoProceso == 1) {
-
+                    document.getElementById("btnGenerarOrdenDePago").disabled = true;
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     document.getElementById("btnConfirmarPaciente").disabled = true;
-                    document.getElementById("tipoDocumento").disabled = true;
+                    //document.getElementById("tipoDOcumento").disabled = true;
+                    //document.getElementById("tipoDOcumento").value = @Html.Raw(Json.Encode(Model.tipoDOcumento));
 
                     $('#idPaciente').prop('readOnly', true);
                     $('#TipoDocIdentidad').prop('readOnly', true);
@@ -415,17 +416,19 @@
                     $('#departamento').prop('readOnly', true);
 
                 } else if (estadoProceso == 2) {
-                    document.getElementById("tipoDocumento").disabled = true;
+                    document.getElementById("btnGenerarOrdenDePago").disabled = true;
+                    document.getElementById("tipoDOcumento").disabled = true;
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
-                    $('#tipoDocumento').prop('readOnly', true);
+                    $('#tipoDOcumento').prop('readOnly', true);
                 } else if (estadoProceso == 3) {
-                    document.getElementById("tipoDocumento").disabled = true;
+                    document.getElementById("btnGenerarOrdenDePago").disabled = true;
+                    document.getElementById("tipoDOcumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     $('#numDocumento').prop('readOnly', true);
-                    $('#tipoDocumento').prop('readOnly', true);
-
+                    $('#tipoDOcumento').prop('readOnly', true);
+                    $('#idPaciente').prop('readOnly', true);
                     document.getElementById("idPaciente").value = @Html.Raw(Json.Encode(Model.Paciente.idPaciente));
                     document.getElementById("TipoDocIdentidad").value = @Html.Raw(Json.Encode(Model.Paciente.TipoDocIdentidad));
                     document.getElementById("NumDocIdentidad").value = @Html.Raw(Json.Encode(Model.Paciente.NumDocIdentidad));
@@ -434,14 +437,13 @@
                     document.getElementById("apeMatPaciente").value = @Html.Raw(Json.Encode(Model.Paciente.apeMatPaciente));
 
                     var dateStr = @Html.Raw(Json.Encode(Model.Paciente.fechaNacPaciente));
-                    var okDate  = /Date\(([-+]?\d+[-+]?\d+)\)/.exec( dateStr );
+                    var okDate  = /Date\(([-+]?\d+[-+]?\d+)\)/.exec(dateStr);
 
-                    if ( okDate ) {
-                        var when = new Date( eval( okDate[ 1 ] ) )
-                        document.getElementById("fechaNacPaciente").value = when.getDate() + '/' + when.getMonth() + '/' + when.getFullYear();
+                    if (okDate) {
+                        var when = new Date(eval(okDate[1]))
+                        document.getElementById("fechaNacPaciente").value = when.getDate() + '/' + (when.getMonth()+1) + '/' + when.getFullYear();
                     }
 
-                    document.getElementById("edad").value = @Html.Raw(Json.Encode(Model.Paciente.edad));
                     document.getElementById("sexo").value = @Html.Raw(Json.Encode(Model.Paciente.sexo));
                     document.getElementById("telefono").value = @Html.Raw(Json.Encode(Model.Paciente.telefono));
                     document.getElementById("direccion").value = @Html.Raw(Json.Encode(Model.Paciente.direccion));
@@ -450,13 +452,13 @@
                     document.getElementById("departamento").value = @Html.Raw(Json.Encode(Model.Paciente.departamento));
 
                 } else if (estadoProceso == 4) {
-                    document.getElementById("tipoDocumento").disabled = true;
+                    document.getElementById("tipoDOcumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     document.getElementById("btnConfirmarPaciente").disabled = true;
 
                     $('#numDocumento').prop('readOnly', true);
-                    $('#tipoDocumento').prop('readOnly', true);
+                    $('#tipoDOcumento').prop('readOnly', true);
                     $('#idPaciente').prop('readOnly', true);
                     $('#TipoDocIdentidad').prop('readOnly', true);
                     $('#NumDocIdentidad').prop('readOnly', true);
@@ -472,13 +474,13 @@
                     $('#provincia').prop('readOnly', true);
                     $('#departamento').prop('readOnly', true);
                 } else if (estadoProceso == 5) {
-                    document.getElementById("tipoDocumento").disabled = true;
+                    document.getElementById("tipoDOcumento").disabled = true;
                     $('#tablaCitas').prop('hidden', true);
                     document.getElementById("btnBuscarCitas").disabled = true;
                     document.getElementById("btnConfirmarPaciente").disabled = true;
 
                     $('#numDocumento').prop('readOnly', true);
-                    $('#tipoDocumento').prop('readOnly', true);
+                    $('#tipoDOcumento').prop('readOnly', true);
                     $('#idPaciente').prop('readOnly', true);
                     $('#TipoDocIdentidad').prop('readOnly', true);
                     $('#NumDocIdentidad').prop('readOnly', true);
@@ -503,10 +505,10 @@
 
         function validate0() {
 
-            var e = document.getElementById("tipoDocumento");
+            var e = document.getElementById("tipoDOcumento");
             var strUser = e.options[e.selectedIndex].value;
 
-            if (document.getElementById("numDocumento").value == "") {
+            if (document.getElementById("numDocumento").value == "" && (strUser == "" || strUser == null)) {
                 alert("Debe ingresar el tipo de documento y el número de documento");
                 return false;
             }
@@ -515,19 +517,24 @@
             return true;
         }
 
-        function validate1(idPaciente) {
+        function validate1(IdCitaSeleccionada) {
             document.getElementById('estadoProceso').value = 1;
-            document.getElementById('IdCitaSeleccionada').value = idPaciente;
+            document.getElementById('IdCitaSeleccionada').value = IdCitaSeleccionada;
         }
 
         function validate2() {
             document.getElementById('estadoProceso').value = 3;
         }
 
-        function validate3(idOrdenDeAtencion) {
+        function validate3_1(idOrdenDeAtencion) {
 
-            document.getElementById('ItemsSeleccionados').value = document.getElementById('ItemsSeleccionados').value + ',' + idOrdenDeAtencion;
+            document.getElementById('ItemsSeleccionados').value = document.getElementById('ItemsSeleccionados').value + ',' + idOrdenDeAtencion + '*';
+            document.getElementById('estadoProceso').value = 5;
+        }
 
+        function validate3_2(idOrdenDeAtencion) {
+
+            document.getElementById('ItemsSeleccionados').value = document.getElementById('ItemsSeleccionados').value.replace(","+idOrdenDeAtencion+"*","");
             document.getElementById('estadoProceso').value = 5;
         }
 
@@ -538,7 +545,7 @@
 
             if (itemsSeleccionados.length > 0) {
                 document.getElementById('estadoProceso').value = 6;
-                alert("Se registró de forma exitosa");
+                //alert("Se registró de forma exitosa");
                 return true;
             }else{
                 alert("Debe seleccionar al menos un ítem");

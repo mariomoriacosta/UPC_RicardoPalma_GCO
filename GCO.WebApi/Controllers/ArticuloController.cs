@@ -15,19 +15,19 @@ namespace GCO.WebApi.Controllers
     public class ArticuloController : ApiController
     {
         [Route("")]
-        public List<ArticuloModel> GetAll()
+        public List<GCO_ArticuloModel> GetAll()
         {
             try
             {
                 Mapper.Initialize(cfg => {
-                    cfg.CreateMap<Articulo, ArticuloModel>();
+                    cfg.CreateMap<GCO_Articulo, GCO_ArticuloModel>();
                     cfg.CreateMap<ICollection<GCO_Solicitud_De_Insumos_Detalle>, ICollection<GCO_Solicitud_De_Insumos_DetalleModel>>();
                 });
 
                 var items = from b in LNArticulo.ListarTodos()
-                            select new ArticuloModel()
+                            select new GCO_ArticuloModel()
                             {
-                                codArticulo = b.codArticulo,
+                                idArticulo = b.idArticulo,
                                 nombre = b.nombre,
                                 descripcion = b.descripcion,
                                 unidadMedida = b.unidadMedida,
@@ -52,9 +52,9 @@ namespace GCO.WebApi.Controllers
         }
 
         [Route("{id}")]
-        public IHttpActionResult GetItem(int id)
+        public IHttpActionResult GetItem(string id)
         {
-            var b = LNArticulo.Obtener(id);
+            var b = LNArticulo.Obtener(Guid.Parse(id));
             if (b == null)
             {
                 var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
@@ -67,13 +67,13 @@ namespace GCO.WebApi.Controllers
             else
             {
                 Mapper.Initialize(cfg => {
-                    cfg.CreateMap<Articulo, ArticuloModel>();
+                    cfg.CreateMap<GCO_Articulo, GCO_ArticuloModel>();
                     cfg.CreateMap<ICollection<GCO_Solicitud_De_Insumos_Detalle>, ICollection<GCO_Solicitud_De_Insumos_DetalleModel>>();
                 });
 
-                var newItem = new ArticuloModel()
+                var newItem = new GCO_ArticuloModel()
                 {
-                    codArticulo = b.codArticulo,
+                    idArticulo = b.idArticulo,
                     nombre = b.nombre,
                     descripcion = b.descripcion,
                     unidadMedida = b.unidadMedida,

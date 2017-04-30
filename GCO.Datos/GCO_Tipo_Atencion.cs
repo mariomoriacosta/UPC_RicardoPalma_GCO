@@ -17,10 +17,10 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GCO_Tipo_Atencion()
         {
-            this.GCO_Orden_De_Atencion = new HashSet<GCO_Orden_De_Atencion>();
+            this.GCO_Plan_De_Tratamiento_Detalle = new HashSet<GCO_Plan_De_Tratamiento_Detalle>();
         }
     
-        public string idTipoAtencion { get; set; }
+        public System.Guid idTipoAtencion { get; set; }
         public string descTipoAtencion { get; set; }
         public string estadoTipoAtencion { get; set; }
         public Nullable<System.DateTime> fechaRegTA { get; set; }
@@ -28,6 +28,6 @@ namespace GCO.Datos
         public Nullable<decimal> precioTipoAtencion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GCO_Orden_De_Atencion> GCO_Orden_De_Atencion { get; set; }
+        public virtual ICollection<GCO_Plan_De_Tratamiento_Detalle> GCO_Plan_De_Tratamiento_Detalle { get; set; }
     }
 }

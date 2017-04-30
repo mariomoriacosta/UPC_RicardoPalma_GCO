@@ -25,21 +25,21 @@ namespace GCO.Datos
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Articulo> Articulo { get; set; }
-        public virtual DbSet<Cita> Cita { get; set; }
+        public virtual DbSet<GCO_Articulo> GCO_Articulo { get; set; }
+        public virtual DbSet<GCO_Cita> GCO_Cita { get; set; }
         public virtual DbSet<GCO_Consultorio> GCO_Consultorio { get; set; }
         public virtual DbSet<GCO_Especialidad> GCO_Especialidad { get; set; }
         public virtual DbSet<GCO_Estado> GCO_Estado { get; set; }
         public virtual DbSet<GCO_Ficha_Dental> GCO_Ficha_Dental { get; set; }
-        public virtual DbSet<GCO_Orden_De_Atencion> GCO_Orden_De_Atencion { get; set; }
+        public virtual DbSet<GCO_HistoriaClinica> GCO_HistoriaClinica { get; set; }
         public virtual DbSet<GCO_Orden_De_Pago> GCO_Orden_De_Pago { get; set; }
+        public virtual DbSet<GCO_Orden_De_Pago_Detalle> GCO_Orden_De_Pago_Detalle { get; set; }
+        public virtual DbSet<GCO_Paciente> GCO_Paciente { get; set; }
         public virtual DbSet<GCO_Plan_De_Tratamiento> GCO_Plan_De_Tratamiento { get; set; }
+        public virtual DbSet<GCO_Plan_De_Tratamiento_Detalle> GCO_Plan_De_Tratamiento_Detalle { get; set; }
         public virtual DbSet<GCO_Solicitud_De_Insumos> GCO_Solicitud_De_Insumos { get; set; }
         public virtual DbSet<GCO_Solicitud_De_Insumos_Detalle> GCO_Solicitud_De_Insumos_Detalle { get; set; }
         public virtual DbSet<GCO_Tipo_Atencion> GCO_Tipo_Atencion { get; set; }
-        public virtual DbSet<HistoriaClinica> HistoriaClinica { get; set; }
-        public virtual DbSet<Paciente> Paciente { get; set; }
         public virtual DbSet<Profesional> Profesional { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

@@ -55,12 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Articulo.cs">
-      <DependentUpon>GCOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Cita.cs">
-      <DependentUpon>GCOModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="GCOModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -76,6 +70,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GCOModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GCO_Articulo.cs">
+      <DependentUpon>GCOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GCO_Cita.cs">
+      <DependentUpon>GCOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GCO_Consultorio.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
@@ -88,13 +88,22 @@
     <Compile Include="GCO_Ficha_Dental.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GCO_Orden_De_Atencion.cs">
+    <Compile Include="GCO_HistoriaClinica.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GCO_Orden_De_Pago.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GCO_Orden_De_Pago_Detalle.cs">
+      <DependentUpon>GCOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GCO_Paciente.cs">
+      <DependentUpon>GCOModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GCO_Plan_De_Tratamiento.cs">
+      <DependentUpon>GCOModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GCO_Plan_De_Tratamiento_Detalle.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GCO_Solicitud_De_Insumos.cs">
@@ -106,19 +115,10 @@
     <Compile Include="GCO_Tipo_Atencion.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="HistoriaClinica.cs">
-      <DependentUpon>GCOModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Paciente.cs">
-      <DependentUpon>GCOModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Profesional.cs">
       <DependentUpon>GCOModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>GCOModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="GCOModel.edmx">

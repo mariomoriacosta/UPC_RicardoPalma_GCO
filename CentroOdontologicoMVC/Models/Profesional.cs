@@ -22,9 +22,5 @@ namespace CentroOdontologicoMVC.Models
         public string provincia { get; set; }
         public string departamento { get; set; }
         public string nroColegiatura { get; set; }
-        public virtual ICollection<Cita> Cita { get; set; }
-        public virtual GCO_Especialidad GCO_Especialidad { get; set; }
-        public virtual ICollection<GCO_Orden_De_Pago> GCO_Orden_De_Pago { get; set; }
-        public virtual ICollection<GCO_Solicitud_De_Insumos> GCO_Solicitud_De_Insumos { get; set; }
     }
 }

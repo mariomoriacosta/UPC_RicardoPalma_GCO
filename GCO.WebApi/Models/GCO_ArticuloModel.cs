@@ -5,9 +5,9 @@ using System.Web;
 
 namespace GCO.WebApi.Models
 {
-    public class ArticuloModel
+    public class GCO_ArticuloModel
     {
-        public int codArticulo { get; set; }
+        public System.Guid idArticulo { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }
         public string unidadMedida { get; set; }

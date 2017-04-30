@@ -9,16 +9,16 @@ namespace GCO.Negocio
 {
     public class LNHistoriaClinica
     {
-        public static List<HistoriaClinica> ListarTodos()
+        public static List<GCO_HistoriaClinica> ListarTodos()
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.HistoriaClinica.ToList();
+            return db.GCO_HistoriaClinica.ToList();
         }
 
-        public static HistoriaClinica Obtener(int id)
+        public static GCO_HistoriaClinica Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
-            return db.HistoriaClinica.FirstOrDefault(x => x.nroHistoria == id);
+            return db.GCO_HistoriaClinica.FirstOrDefault(x => x.idHistoriaClinica == id);
         }
     }
 }

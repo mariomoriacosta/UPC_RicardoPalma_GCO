@@ -46,21 +46,21 @@ namespace CentroOdontologicoMVC.Controllers
             int estadoProceso = 0;
             string tipoDOcumento = "";
             string numDocumento = "";
-            ICollection<Cita> Citas = null;
-            Cita CitaSeleccionada = null;
+            ICollection<GCO_Cita> Citas = null;
+            GCO_Cita CitaSeleccionada = null;
             string IdCitaSeleccionada = "";
-            Paciente Paciente = new Paciente();
+            GCO_Paciente Paciente = new GCO_Paciente();
             Paciente.fechaNacPaciente = DateTime.Parse("1900/01/01");
-            ICollection<GCO_Orden_De_Atencion> OrdenDeAtencion = null;
+            ICollection<GCO_Plan_De_Tratamiento_Detalle> planDeTratamientoDetalle = null;
             GCO_Plan_De_Tratamiento PlanVacio = new GCO_Plan_De_Tratamiento();
-            GCO_Orden_De_Atencion OrdenVacio = new GCO_Orden_De_Atencion();
+            GCO_Plan_De_Tratamiento_Detalle planDeTratamientoDetalleVacio = new GCO_Plan_De_Tratamiento_Detalle();
 
             GCO_Tipo_Atencion tipo_atencion = new GCO_Tipo_Atencion();
             GCO_Estado estado = new GCO_Estado();
-            OrdenVacio.GCO_Tipo_Atencion = tipo_atencion;
-            OrdenVacio.GCO_Estado = estado;
+            planDeTratamientoDetalleVacio.GCO_Tipo_Atencion = tipo_atencion;
+            //--planDeTratamientoDetalleVacio.GCO_Estado = estado;
 
-            GCO_Orden_De_Pago OrdenDePago = new GCO_Orden_De_Pago();
+            GCO_Orden_De_Pago ordenDePago = new GCO_Orden_De_Pago();
 
             //List<System.Web.Mvc.SelectListItem> listaTipoDocumento = new List<System.Web.Mvc.SelectListItem>(){
             //   new SelectListItem { Value = "1", Text = "DNI" },
@@ -76,11 +76,12 @@ namespace CentroOdontologicoMVC.Controllers
             generarOrdenDePagoModel.CitaSeleccionada = CitaSeleccionada;
             generarOrdenDePagoModel.IdCitaSeleccionada = IdCitaSeleccionada;
             generarOrdenDePagoModel.Paciente = Paciente;
-            generarOrdenDePagoModel.OrdenDeAtencion = OrdenDeAtencion;
+            generarOrdenDePagoModel.PlanDeTratamientoDetalle = planDeTratamientoDetalle;
             generarOrdenDePagoModel.PlanVacio = PlanVacio;
-            generarOrdenDePagoModel.OrdenVacio = OrdenVacio;
-            generarOrdenDePagoModel.OrdenDePago = OrdenDePago;
+            generarOrdenDePagoModel.PlanDeTratamientoDetalleVacio = planDeTratamientoDetalleVacio;
+            generarOrdenDePagoModel.OrdenDePago = ordenDePago;
             generarOrdenDePagoModel.ItemsSeleccionados = "";
+            generarOrdenDePagoModel.PrecioAcumuladoTotal = 0.00;
             //generarOrdenDePagoModel.listaTipoDocumento = listaTipoDocumento;
             @ViewBag.Message = "";
             return View(generarOrdenDePagoModel);
@@ -91,7 +92,7 @@ namespace CentroOdontologicoMVC.Controllers
         {
             if (generarOrdenDePagoModel.estadoProceso == 0) //ha presionado el boton buscar cita
             {                
-                List<Cita> listado = new List<Cita>();
+                List<GCO_Cita> listado = new List<GCO_Cita>();
 
                 using (var client = new HttpClient())
                 {
@@ -103,7 +104,7 @@ namespace CentroOdontologicoMVC.Controllers
                     if (Res.IsSuccessStatusCode)
                     {
                         var responseData = Res.Content.ReadAsStringAsync().Result;
-                        listado = JsonConvert.DeserializeObject<List<Cita>>(responseData);
+                        listado = JsonConvert.DeserializeObject<List<GCO_Cita>>(responseData);
                     }
 
                     if (listado.Count > 0)
@@ -127,19 +128,19 @@ namespace CentroOdontologicoMVC.Controllers
 
                 generarOrdenDePagoModel.estadoProceso = 2;
 
-                Paciente paciente = null;
+                GCO_Paciente paciente = null;
 
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("paciente/" + generarOrdenDePagoModel.IdCitaSeleccionada);
+                    HttpResponseMessage Res = await client.GetAsync("paciente/" + generarOrdenDePagoModel.numDocumento + "/" + generarOrdenDePagoModel.tipoDOcumento);
 
                     if (Res.IsSuccessStatusCode)
                     {
                         var responseData = Res.Content.ReadAsStringAsync().Result;
-                        paciente = JsonConvert.DeserializeObject<Paciente>(responseData);
+                        paciente = JsonConvert.DeserializeObject<GCO_Paciente>(responseData);
                     }
 
                     if (paciente != null)
@@ -150,12 +151,11 @@ namespace CentroOdontologicoMVC.Controllers
                     }
                     else
                     {
-                        generarOrdenDePagoModel.estadoProceso = 2;
+                        generarOrdenDePagoModel.estadoProceso = 0;
                         @ViewBag.Message = "No se encontró un paciente con el id: "+ generarOrdenDePagoModel.IdCitaSeleccionada;
+                        return View(generarOrdenDePagoModel);
                     }
                 }
-
-                return View(generarOrdenDePagoModel);
 
             }
             else if (generarOrdenDePagoModel.estadoProceso == 2)
@@ -168,27 +168,35 @@ namespace CentroOdontologicoMVC.Controllers
 
                 //guardar datos del paciente
 
+                UpdatePacienteAsync(generarOrdenDePagoModel.Paciente);
+                
                 //mandar el plan de tratamiento
 
-                List<GCO_Orden_De_Atencion> listado = new List<GCO_Orden_De_Atencion>();
+                List<GCO_Plan_De_Tratamiento_Detalle> listado = new List<GCO_Plan_De_Tratamiento_Detalle>();
 
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("ordenDeAtencion/" + generarOrdenDePagoModel.Paciente.idPaciente);
+                    HttpResponseMessage Res = await client.GetAsync("planDeTratamientoDetalle/" + generarOrdenDePagoModel.Paciente.idPaciente);
 
                     if (Res.IsSuccessStatusCode)
                     {
                         var responseData = Res.Content.ReadAsStringAsync().Result;
-                        listado = JsonConvert.DeserializeObject<List<GCO_Orden_De_Atencion>>(responseData);
+                        listado = JsonConvert.DeserializeObject<List<GCO_Plan_De_Tratamiento_Detalle>>(responseData);
                     }
 
                     if (listado != null)
                     {   //si encuentra citas, aumenta estado del proceso y retorna
+
+                        foreach (var item in listado)
+                        {
+                            item.estadoLista = "Pendiente";
+                        }
+
                         generarOrdenDePagoModel.estadoProceso = 5;
-                        generarOrdenDePagoModel.OrdenDeAtencion = listado;
+                        generarOrdenDePagoModel.PlanDeTratamientoDetalle = listado;
                         
                         return View(generarOrdenDePagoModel);
                     }
@@ -207,42 +215,49 @@ namespace CentroOdontologicoMVC.Controllers
             }
             else if (generarOrdenDePagoModel.estadoProceso == 5)
             {
-                List<GCO_Orden_De_Atencion> listado = new List<GCO_Orden_De_Atencion>();
+                List<GCO_Plan_De_Tratamiento_Detalle> listado = new List<GCO_Plan_De_Tratamiento_Detalle>();
 
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
                     client.DefaultRequestHeaders.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    HttpResponseMessage Res = await client.GetAsync("ordenDeAtencion/" + generarOrdenDePagoModel.Paciente.idPaciente);
+                    HttpResponseMessage Res = await client.GetAsync("planDeTratamientoDetalle/" + generarOrdenDePagoModel.Paciente.idPaciente);
 
                     if (Res.IsSuccessStatusCode)
                     {
                         var responseData = Res.Content.ReadAsStringAsync().Result;
-                        listado = JsonConvert.DeserializeObject<List<GCO_Orden_De_Atencion>>(responseData);
+                        listado = JsonConvert.DeserializeObject<List<GCO_Plan_De_Tratamiento_Detalle>>(responseData);
                     }
 
                     if (listado != null)
                     {   //si encuentra citas, aumenta estado del proceso y retorna
-                        generarOrdenDePagoModel.OrdenDeAtencion = listado;
+                        generarOrdenDePagoModel.PlanDeTratamientoDetalle = listado;
 
                         double precioAcumulado = 0.00;
 
-                        var tmp = generarOrdenDePagoModel.ItemsSeleccionados.Split(',');
+                        var tmp = (generarOrdenDePagoModel.ItemsSeleccionados+"").Split(',');
                         
                         foreach (var item in listado)
                         {
                             for (int i = 0; i < tmp.Length; i++)
                             {
-                                if (item.idOrdenAtencion == tmp[i])
+                                try
                                 {
-                                    precioAcumulado += double.Parse(item.GCO_Tipo_Atencion.precioTipoAtencion.ToString());
-                                    item.idEstado = "Seleccionado";
+                                    if (item.idPlanTratamientoDetalle == Guid.Parse(tmp[i].Replace("*", "").Replace("+", "")))
+                                    {
+                                        precioAcumulado += double.Parse(item.GCO_Tipo_Atencion.precioTipoAtencion.ToString());
+                                        item.estadoLista = "Seleccionado";
+                                    }
                                 }
+                                catch (Exception)
+                                {
+                                }                                
                              }                     
                         }
-
+                        generarOrdenDePagoModel.PrecioAcumuladoTotal = precioAcumulado;
                         @ViewBag.PrecioAcumulado = precioAcumulado;
+                        
                         return View(generarOrdenDePagoModel);
                     }
                 }
@@ -253,18 +268,57 @@ namespace CentroOdontologicoMVC.Controllers
             }
             else if (generarOrdenDePagoModel.estadoProceso == 6)
             {
-                //Genrar la orden de pago y regresar al index
-                @ViewBag.Message = "";
-                DateTime dt = new DateTime();
+                List<GCO_Plan_De_Tratamiento_Detalle> listado = new List<GCO_Plan_De_Tratamiento_Detalle>();
+                double precioAcumulado = 0.00;
 
-                GCO_Orden_De_Pago o = new GCO_Orden_De_Pago();
-                o.nroOrdenPago = "4";
-                o.descuentoOP = 0;
-                o.fechaRegOP = dt.Date;
-                o.fechaModOP = dt.Date;
-                o.idEstado = "1";
-                o.precioTotOP = 100;
-                CreateAsync(o);
+                using (var client = new HttpClient())
+                {
+                    client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
+                    client.DefaultRequestHeaders.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    HttpResponseMessage Res = await client.GetAsync("planDeTratamientoDetalle/" + generarOrdenDePagoModel.Paciente.idPaciente);
+
+                    if (Res.IsSuccessStatusCode)
+                    {
+                        var responseData = Res.Content.ReadAsStringAsync().Result;
+                        listado = JsonConvert.DeserializeObject<List<GCO_Plan_De_Tratamiento_Detalle>>(responseData);
+                    }
+
+                    if (listado != null)
+                    {   //si encuentra citas, aumenta estado del proceso y retorna
+                        generarOrdenDePagoModel.PlanDeTratamientoDetalle = listado;
+
+                        var tmp = (generarOrdenDePagoModel.ItemsSeleccionados + "").Split(',');
+
+                        foreach (var item in listado)
+                        {
+                            for (int i = 0; i < tmp.Length; i++)
+                            {
+                                try
+                                {
+                                    if (item.idPlanTratamientoDetalle == Guid.Parse(tmp[i].Replace("*", "").Replace("+", "")))
+                                    {
+                                        precioAcumulado += double.Parse(item.GCO_Tipo_Atencion.precioTipoAtencion.ToString());
+                                        item.estadoLista = "Seleccionado";
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                }
+                            }
+                        }
+                    }
+                }
+
+                GCO_Orden_De_Pago p = new GCO_Orden_De_Pago();
+                p.idOrdenDePago = Guid.NewGuid();
+                p.precioTotOP = decimal.Parse(precioAcumulado+"");
+                p.descuentoOP = 0;
+                p.fechaRegOP = DateTime.Now;
+                p.fechaModOP = DateTime.Now;
+                p.idEstado = Guid.Parse("8190C843-00BA-487E-AFA9-6D793FFE7AEC");
+
+                CreateAsync(p);
 
                 return RedirectToAction("Index","OrdenDePago");
             }
@@ -283,6 +337,21 @@ namespace CentroOdontologicoMVC.Controllers
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = await client.PostAsJsonAsync("ordenDePago", o);
+                var r =  response;
+                return null;
+            }
+        }
+
+        static async Task<Uri> UpdatePacienteAsync(GCO_Paciente o)
+        {
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(ConfigurationManager.AppSettings["UrlApi"]);
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = await client.PutAsJsonAsync("paciente", o);
                 return null;
             }
         }

@@ -17,17 +17,17 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GCO_Especialidad()
         {
-            this.Cita = new HashSet<Cita>();
+            this.GCO_Cita = new HashSet<GCO_Cita>();
             this.Profesional = new HashSet<Profesional>();
         }
     
-        public string idEspecialidad { get; set; }
+        public System.Guid idEspecialidad { get; set; }
         public string descEspecialidad { get; set; }
         public Nullable<System.DateTime> fechaRegEspec { get; set; }
         public Nullable<System.DateTime> fechaModEspec { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Cita { get; set; }
+        public virtual ICollection<GCO_Cita> GCO_Cita { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Profesional> Profesional { get; set; }
     }

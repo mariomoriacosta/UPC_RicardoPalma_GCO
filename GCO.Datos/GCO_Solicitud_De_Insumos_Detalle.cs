@@ -14,13 +14,13 @@ namespace GCO.Datos
     
     public partial class GCO_Solicitud_De_Insumos_Detalle
     {
-        public string idSolInsumDet { get; set; }
-        public string idSolicitudInsumos { get; set; }
-        public int codArticulo { get; set; }
+        public System.Guid idSolInsumDet { get; set; }
+        public Nullable<System.Guid> idSolicitudInsumos { get; set; }
+        public Nullable<System.Guid> idArticulo { get; set; }
         public Nullable<int> cantidadInsumo { get; set; }
         public Nullable<System.DateTime> fechaRegSID { get; set; }
     
-        public virtual Articulo Articulo { get; set; }
+        public virtual GCO_Articulo GCO_Articulo { get; set; }
         public virtual GCO_Solicitud_De_Insumos GCO_Solicitud_De_Insumos { get; set; }
     }
 }

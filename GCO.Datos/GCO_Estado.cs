@@ -18,13 +18,13 @@ namespace GCO.Datos
         public GCO_Estado()
         {
             this.GCO_Ficha_Dental = new HashSet<GCO_Ficha_Dental>();
+            this.GCO_Orden_De_Pago_Detalle = new HashSet<GCO_Orden_De_Pago_Detalle>();
             this.GCO_Orden_De_Pago = new HashSet<GCO_Orden_De_Pago>();
-            this.GCO_Orden_De_Atencion = new HashSet<GCO_Orden_De_Atencion>();
             this.GCO_Plan_De_Tratamiento = new HashSet<GCO_Plan_De_Tratamiento>();
             this.GCO_Solicitud_De_Insumos = new HashSet<GCO_Solicitud_De_Insumos>();
         }
     
-        public string idEstado { get; set; }
+        public System.Guid idEstado { get; set; }
         public string descEstado { get; set; }
         public string paramGrupo { get; set; }
         public Nullable<bool> estadoActivo { get; set; }
@@ -32,9 +32,9 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GCO_Ficha_Dental> GCO_Ficha_Dental { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GCO_Orden_De_Pago> GCO_Orden_De_Pago { get; set; }
+        public virtual ICollection<GCO_Orden_De_Pago_Detalle> GCO_Orden_De_Pago_Detalle { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GCO_Orden_De_Atencion> GCO_Orden_De_Atencion { get; set; }
+        public virtual ICollection<GCO_Orden_De_Pago> GCO_Orden_De_Pago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GCO_Plan_De_Tratamiento> GCO_Plan_De_Tratamiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

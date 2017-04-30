@@ -12,23 +12,24 @@ namespace GCO.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class HistoriaClinica
+    public partial class GCO_Articulo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HistoriaClinica()
+        public GCO_Articulo()
         {
-            this.GCO_Ficha_Dental = new HashSet<GCO_Ficha_Dental>();
+            this.GCO_Solicitud_De_Insumos_Detalle = new HashSet<GCO_Solicitud_De_Insumos_Detalle>();
         }
     
-        public int nroHistoria { get; set; }
-        public Nullable<int> idPaciente { get; set; }
-        public string grupoSanguineo { get; set; }
-        public string observacion { get; set; }
-        public Nullable<System.DateTime> fechaCreacion { get; set; }
-        public Nullable<System.DateTime> fechaActualizacion { get; set; }
+        public System.Guid idArticulo { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }
+        public string unidadMedida { get; set; }
+        public string TipoArticulo { get; set; }
+        public Nullable<decimal> costosxUM { get; set; }
+        public Nullable<System.DateTime> fechaRegArticulo { get; set; }
+        public Nullable<System.DateTime> fechaModArticulo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GCO_Ficha_Dental> GCO_Ficha_Dental { get; set; }
-        public virtual Paciente Paciente { get; set; }
+        public virtual ICollection<GCO_Solicitud_De_Insumos_Detalle> GCO_Solicitud_De_Insumos_Detalle { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿using GCO.Negocio;
+﻿using AutoMapper;
+using GCO.Datos;
+using GCO.Negocio;
 using GCO.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -13,20 +15,21 @@ namespace GCO.WebApi.Controllers
     public class CitaController : ApiController
     {
         [Route("")]
-        public List<CitaModel> GetAll()
+        public List<GCO_CitaModel> GetAll()
         {
             try
             {
                 var items = from b in LNCita.ListarTodos()
-                            select new CitaModel()
+                            select new GCO_CitaModel()
                             {
-                                nroCita = b.nroCita,
+                                idCita = b.idCita,
                                 idPaciente = b.idPaciente,
                                 nroIdentificProf = b.nroIdentificProf,
                                 idEspecialidad = b.idEspecialidad,
                                 fechaCita = b.fechaCita,
-                                horaCita = b.horaCita,
                                 observacion = b.observacion,
+                                fechaRegCita = b.fechaRegCita,
+                                fechaModCita = b.fechaModCita,
                                 idConsultorio = b.idConsultorio
                             };
                 return items.ToList();
@@ -43,21 +46,31 @@ namespace GCO.WebApi.Controllers
         }
 
         [Route("{numdoc}/{tipodoc}")]
-        public List<CitaModel> GetForId(string numdoc,string tipodoc)
+        public List<GCO_CitaModel> GetForId(string numdoc,string tipodoc)
         {
             try
             {
-                var items = from b in LNCita.ListarTodos() where b.Paciente.NumDocIdentidad == numdoc && b.Paciente.TipoDocIdentidad == tipodoc
-                            select new CitaModel()
+                Mapper.Initialize(cfg => {
+                    cfg.CreateMap<GCO_Paciente, GCO_PacienteModel>();
+                    cfg.CreateMap<GCO_Especialidad, GCO_EspecialidadModel>();
+                    cfg.CreateMap<GCO_Consultorio, GCO_ConsultorioModel>();
+                });
+
+                var items = from b in LNCita.ListarTodos() where b.GCO_Paciente.NumDocIdentidad == numdoc && b.GCO_Paciente.TipoDocIdentidad == tipodoc
+                            select new GCO_CitaModel()
                             {
-                                nroCita = b.nroCita,
+                                idCita = b.idCita,
                                 idPaciente = b.idPaciente,
                                 nroIdentificProf = b.nroIdentificProf,
                                 idEspecialidad = b.idEspecialidad,
                                 fechaCita = b.fechaCita,
-                                horaCita = b.horaCita,
                                 observacion = b.observacion,
-                                idConsultorio = b.idConsultorio
+                                fechaRegCita = b.fechaRegCita,
+                                fechaModCita = b.fechaModCita,
+                                idConsultorio = b.idConsultorio,
+                                GCO_Paciente = Mapper.Map<GCO_PacienteModel>(b.GCO_Paciente),
+                                GCO_Especialidad = Mapper.Map<GCO_EspecialidadModel>(b.GCO_Especialidad),
+                                GCO_Consultorio = Mapper.Map<GCO_ConsultorioModel>(b.GCO_Consultorio)
                             };
                 return items.ToList();
             }
@@ -71,35 +84,6 @@ namespace GCO.WebApi.Controllers
                 throw new HttpResponseException(resp);
             }
         }
-        
-        //[Route("{id}")]
-        //public IHttpActionResult GetItem(int id)
-        //{
-        //    var b = LNCita.Obtener(id);
-        //    if (b == null)
-        //    {
-        //        var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
-        //        {
-        //            Content = new StringContent(string.Format("No item with ID = {0}", id)),
-        //            ReasonPhrase = "Items ID Not Found"
-        //        };
-        //        throw new HttpResponseException(resp);
-        //    }
-        //    else
-        //    {
-        //        var newItem = new CitaModel()
-        //        {
-        //            nroCita = b.nroCita,
-        //            idPaciente = b.idPaciente,
-        //            nroIdentificProf = b.nroIdentificProf,
-        //            idEspecialidad = b.idEspecialidad,
-        //            fechaCita = b.fechaCita,
-        //            horaCita = b.horaCita,
-        //            observacion = b.observacion,
-        //            idConsultorio = b.idConsultorio
-        //        };
-        //        return Ok(newItem);
-        //    }
-        //}
+
     }
 }

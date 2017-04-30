@@ -17,14 +17,14 @@ namespace GCO.Datos
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public GCO_Consultorio()
         {
-            this.Cita = new HashSet<Cita>();
+            this.GCO_Cita = new HashSet<GCO_Cita>();
         }
     
-        public string idConsultorio { get; set; }
+        public System.Guid idConsultorio { get; set; }
         public string descConsultorio { get; set; }
-        public bool estadoConsultorio { get; set; }
+        public Nullable<bool> estadoConsultorio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cita> Cita { get; set; }
+        public virtual ICollection<GCO_Cita> GCO_Cita { get; set; }
     }
 }

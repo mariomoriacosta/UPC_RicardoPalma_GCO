@@ -12,23 +12,24 @@ namespace GCO.Datos
     using System;
     using System.Collections.Generic;
     
-    public partial class GCO_Orden_De_Pago
+    public partial class GCO_Plan_De_Tratamiento_Detalle
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GCO_Orden_De_Pago()
+        public GCO_Plan_De_Tratamiento_Detalle()
         {
             this.GCO_Orden_De_Pago_Detalle = new HashSet<GCO_Orden_De_Pago_Detalle>();
         }
     
-        public System.Guid idOrdenDePago { get; set; }
-        public Nullable<decimal> precioTotOP { get; set; }
-        public Nullable<decimal> descuentoOP { get; set; }
-        public Nullable<System.DateTime> fechaRegOP { get; set; }
-        public Nullable<System.DateTime> fechaModOP { get; set; }
-        public Nullable<System.Guid> idEstado { get; set; }
+        public System.Guid idPlanTratamientoDetalle { get; set; }
+        public Nullable<System.Guid> idPlanTratamiento { get; set; }
+        public Nullable<System.Guid> idTipoAtencion { get; set; }
+        public Nullable<System.DateTime> fechaRegOA { get; set; }
+        public Nullable<System.DateTime> fechaModOA { get; set; }
+        public string Descripcion { get; set; }
     
-        public virtual GCO_Estado GCO_Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GCO_Orden_De_Pago_Detalle> GCO_Orden_De_Pago_Detalle { get; set; }
+        public virtual GCO_Plan_De_Tratamiento GCO_Plan_De_Tratamiento { get; set; }
+        public virtual GCO_Tipo_Atencion GCO_Tipo_Atencion { get; set; }
     }
 }

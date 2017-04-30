@@ -9,8 +9,8 @@ namespace CentroOdontologicoMVC.Models
 {
     public class GCO_Orden_De_Pago
     {
-        [DisplayName("Número de Orden de Pago")]
-        public string nroOrdenPago { get; set; }
+        [DisplayName("Id Orden de Pago")]
+        public System.Guid idOrdenDePago { get; set; }
         [DisplayName("Precio total")]
         public Nullable<decimal> precioTotOP { get; set; }
         [DisplayName("Descuento")]
@@ -19,7 +19,10 @@ namespace CentroOdontologicoMVC.Models
         public Nullable<System.DateTime> fechaRegOP { get; set; }
         [DisplayName("Fecha de modificación")]
         public Nullable<System.DateTime> fechaModOP { get; set; }
+        [DisplayName("Id Estado")]
+        public Nullable<System.Guid> idEstado { get; set; }
         [DisplayName("Estado")]
-        public string idEstado { get; set; }
+        public virtual GCO_Estado GCO_Estado { get; set; }
+
     }
 }

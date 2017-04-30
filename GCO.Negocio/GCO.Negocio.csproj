@@ -50,10 +50,11 @@
     <Compile Include="LNEstado.cs" />
     <Compile Include="LNFichaDental.cs" />
     <Compile Include="LNHistoriaClinica.cs" />
-    <Compile Include="LNOrdenDeAtencion.cs" />
+    <Compile Include="LNOrdenDePagoDetalle.cs" />
     <Compile Include="LNOrdenDePago.cs" />
     <Compile Include="LNPaciente.cs" />
     <Compile Include="LNPlanDeTratamiento.cs" />
+    <Compile Include="LNPlanDeTratamientoDetalle.cs" />
     <Compile Include="LNProfesional.cs" />
     <Compile Include="LNSolicitudDeInsumos.cs" />
     <Compile Include="LNTipoAtencion.cs" />

@@ -31,8 +31,7 @@ namespace GCO.WebApi.Controllers
                                 descPlanTratamiento = b.descPlanTratamiento,
                                 fechaRegPT = b.fechaRegPT,
                                 fechaModPT = b.fechaModPT,
-                                idEstado = b.idEstado//,
-                                //GCO_Orden_De_Atencion = Mapper.Map<ICollection<GCO_Orden_De_AtencionModel>>(b.GCO_Orden_De_Atencion)
+                                idEstado = b.idEstado
                             };
                 return items.ToList();
             }
@@ -48,12 +47,12 @@ namespace GCO.WebApi.Controllers
         }
 
         [Route("{id}")]
-        public List<GCO_Plan_De_TratamientoModel> GetForIdPaciente(int id)
+        public List<GCO_Plan_De_TratamientoModel> GetForIdPaciente(string id)
         {
             try
             {
                 var items = from b in LNPlanDeTratamiento.ListarTodos()
-                            where b.GCO_Ficha_Dental.HistoriaClinica.idPaciente == id
+                            where b.GCO_Ficha_Dental.GCO_HistoriaClinica.idPaciente == Guid.Parse(id)
                             select new GCO_Plan_De_TratamientoModel()
                             {
                                 idPlanTratamiento = b.idPlanTratamiento,
@@ -61,8 +60,7 @@ namespace GCO.WebApi.Controllers
                                 descPlanTratamiento = b.descPlanTratamiento,
                                 fechaRegPT = b.fechaRegPT,
                                 fechaModPT = b.fechaModPT,
-                                idEstado = b.idEstado//,
-                                //ICollection <GCO_Orden_De_AtencionModel> GCO_Orden_De_Atencion = b.GCO_Orden_De_Atencion
+                                idEstado = b.idEstado
                             };
 
                 //hacer un select de todas las ordenes de atención de los planes de atención del paciente (lista de arriba)
@@ -72,21 +70,19 @@ namespace GCO.WebApi.Controllers
 
                 foreach (var item in items)
                 {
-                    var items2 = from b in LNOrdenDeAtencion.ListarTodos()
+                    var items2 = from b in LNPlanDeTratamientoDetalle.ListarTodos()
                                  where b.idPlanTratamiento == item.idPlanTratamiento
-                                 select new GCO_Orden_De_AtencionModel()
+                                 select new GCO_Plan_De_Tratamiento_DetalleModel()
                                  {
-                                     idOrdenAtencion = b.idOrdenAtencion,
+                                     idPlanTratamientoDetalle = b.idPlanTratamientoDetalle,
                                      idPlanTratamiento = b.idPlanTratamiento,
                                      idTipoAtencion = b.idTipoAtencion,
-                                     idEstado = b.idEstado,
                                      fechaRegOA = b.fechaRegOA,
                                      fechaModOA = b.fechaModOA,
-                                     nroOrdenPago = b.nroOrdenPago,
-                                     numOrdenAtencion = b.numOrdenAtencion
+                                     Descripcion = b.Descripcion
                                  };
 
-                    item.GCO_Orden_De_Atencion = items2.ToList();
+                    item.GCO_Plan_De_Tratamiento_Detalle = items2.ToList();
                     nuevaLista.Add(item);
                 }
 
@@ -103,34 +99,5 @@ namespace GCO.WebApi.Controllers
             }
         }
 
-        //[Route("{id}")]
-        //public IHttpActionResult GetItem(int id)
-        //{
-        //    var b = LNCita.Obtener(id);
-        //    if (b == null)
-        //    {
-        //        var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
-        //        {
-        //            Content = new StringContent(string.Format("No item with ID = {0}", id)),
-        //            ReasonPhrase = "Items ID Not Found"
-        //        };
-        //        throw new HttpResponseException(resp);
-        //    }
-        //    else
-        //    {
-        //        var newItem = new CitaModel()
-        //        {
-        //            nroCita = b.nroCita,
-        //            idPaciente = b.idPaciente,
-        //            nroIdentificProf = b.nroIdentificProf,
-        //            idEspecialidad = b.idEspecialidad,
-        //            fechaCita = b.fechaCita,
-        //            horaCita = b.horaCita,
-        //            observacion = b.observacion,
-        //            idConsultorio = b.idConsultorio
-        //        };
-        //        return Ok(newItem);
-        //    }
-        //}
     }
 }

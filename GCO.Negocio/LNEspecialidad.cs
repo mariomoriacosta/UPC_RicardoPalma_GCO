@@ -15,7 +15,7 @@ namespace GCO.Negocio
             return db.GCO_Especialidad.ToList();
         }
 
-        public static GCO_Especialidad Obtener(string id)
+        public static GCO_Especialidad Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
             return db.GCO_Especialidad.FirstOrDefault(x => x.idEspecialidad == id);

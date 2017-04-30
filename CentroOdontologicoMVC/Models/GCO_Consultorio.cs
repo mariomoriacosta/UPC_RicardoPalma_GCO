@@ -10,6 +10,5 @@ namespace CentroOdontologicoMVC.Models
         public string idConsultorio { get; set; }
         public string descConsultorio { get; set; }
         public bool estadoConsultorio { get; set; }
-        public virtual ICollection<Cita> Cita { get; set; }
     }
 }

@@ -169,20 +169,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulo.cs" />
-    <Compile Include="Models\Cita.cs" />
+    <Compile Include="Models\GCO_Cita.cs" />
     <Compile Include="Models\GCO_Consultorio.cs" />
     <Compile Include="Models\GCO_Especialidad.cs" />
     <Compile Include="Models\GCO_Estado.cs" />
     <Compile Include="Models\GCO_Ficha_Dental.cs" />
-    <Compile Include="Models\GCO_Orden_De_Atencion.cs" />
+    <Compile Include="Models\GCO_Orden_De_Pago_Detalle.cs" />
+    <Compile Include="Models\GCO_Plan_De_Tratamiento_Detalle.cs" />
     <Compile Include="Models\GCO_Plan_De_Tratamiento.cs" />
     <Compile Include="Models\GCO_Solicitud_De_Insumos.cs" />
     <Compile Include="Models\GCO_Solicitud_De_Insumos_Detalle.cs" />
     <Compile Include="Models\GCO_Tipo_Atencion.cs" />
     <Compile Include="Models\GenerarOrdenDePagoModel.cs" />
     <Compile Include="Models\GCO_Orden_De_Pago.cs" />
-    <Compile Include="Models\HistoriaClinica.cs" />
-    <Compile Include="Models\Paciente.cs" />
+    <Compile Include="Models\GCO_HistoriaClinica.cs" />
+    <Compile Include="Models\GCO_Paciente.cs" />
     <Compile Include="Models\Profesional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

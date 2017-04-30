@@ -11,25 +11,28 @@ using System.Web.Http;
 
 namespace GCO.WebApi.Controllers
 {
-    [RoutePrefix("api/ordenDeAtencion")]
-    public class CGO_Orden_De_AtencionController : ApiController
+    [RoutePrefix("api/planDeTratamientoDetalle")]
+    public class GCO_Plan_De_Tratamiento_DetalleController : ApiController
     {
         [Route("")]
-        public List<GCO_Orden_De_AtencionModel> GetAll()
+        public List<GCO_Plan_De_Tratamiento_DetalleModel> GetAll()
         {
             try
             {
-                var items = from b in LNOrdenDeAtencion.ListarTodos()
-                            select new GCO_Orden_De_AtencionModel()
+                Mapper.Initialize(cfg => {
+                    cfg.CreateMap<GCO_Tipo_Atencion, GCO_Tipo_AtencionModel>();
+                });
+
+                var items = from b in LNPlanDeTratamientoDetalle.ListarTodos()
+                            select new GCO_Plan_De_Tratamiento_DetalleModel()
                             {
-                                idOrdenAtencion = b.idOrdenAtencion,
+                                idPlanTratamientoDetalle = b.idPlanTratamientoDetalle,
                                 idPlanTratamiento = b.idPlanTratamiento,
                                 idTipoAtencion = b.idTipoAtencion,
-                                idEstado = b.idEstado,
                                 fechaRegOA = b.fechaRegOA,
                                 fechaModOA = b.fechaModOA,
-                                nroOrdenPago = b.nroOrdenPago,
-                                numOrdenAtencion = b.numOrdenAtencion
+                                Descripcion = b.Descripcion,
+                                GCO_Tipo_Atencion = Mapper.Map<GCO_Tipo_AtencionModel>(b.GCO_Tipo_Atencion)
                             };
                 return items.ToList();
             }
@@ -45,7 +48,7 @@ namespace GCO.WebApi.Controllers
         }
 
         [Route("{id}")]
-        public List<GCO_Orden_De_AtencionModel> GetForIdPaciente(int id)
+        public List<GCO_Plan_De_Tratamiento_DetalleModel> GetForIdPaciente(string id)
         {
             try
             {
@@ -53,21 +56,19 @@ namespace GCO.WebApi.Controllers
                     cfg.CreateMap<GCO_Tipo_Atencion, GCO_Tipo_AtencionModel>();
                 });
 
-                var items = from b in LNOrdenDeAtencion.ListarTodos()
-                            where b.GCO_Plan_De_Tratamiento.GCO_Ficha_Dental.HistoriaClinica.Paciente.idPaciente == id
-                            select new GCO_Orden_De_AtencionModel()
+                var items = from b in LNPlanDeTratamientoDetalle.ListarTodos()
+                            where b.GCO_Plan_De_Tratamiento.GCO_Ficha_Dental.GCO_HistoriaClinica.GCO_Paciente.idPaciente == Guid.Parse(id)
+                            select new GCO_Plan_De_Tratamiento_DetalleModel()
                             {
-                                idOrdenAtencion = b.idOrdenAtencion,
+                                idPlanTratamientoDetalle = b.idPlanTratamientoDetalle,
                                 idPlanTratamiento = b.idPlanTratamiento,
                                 idTipoAtencion = b.idTipoAtencion,
-                                idEstado = b.GCO_Estado.descEstado,
-                                GCO_Tipo_Atencion = Mapper.Map<GCO_Tipo_AtencionModel>(b.GCO_Tipo_Atencion),
                                 fechaRegOA = b.fechaRegOA,
                                 fechaModOA = b.fechaModOA,
-                                nroOrdenPago = b.nroOrdenPago,
-                                numOrdenAtencion = b.numOrdenAtencion
+                                Descripcion = b.Descripcion,
+                                GCO_Tipo_Atencion = Mapper.Map<GCO_Tipo_AtencionModel>(b.GCO_Tipo_Atencion)
                             };
-                
+
                 return items.ToList();
             }
             catch (System.Exception ex)

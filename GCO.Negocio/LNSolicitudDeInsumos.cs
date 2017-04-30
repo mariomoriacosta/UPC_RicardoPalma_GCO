@@ -15,7 +15,7 @@ namespace GCO.Negocio
             return db.GCO_Solicitud_De_Insumos.ToList();
         }
 
-        public static GCO_Solicitud_De_Insumos Obtener(string id)
+        public static GCO_Solicitud_De_Insumos Obtener(Guid id)
         {
             RicardoPalmaBDEntities db = new RicardoPalmaBDEntities();
             return db.GCO_Solicitud_De_Insumos.FirstOrDefault(x => x.idSolicitudInsumos == id);
